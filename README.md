@@ -30,8 +30,7 @@
 
 ---
 
-> [!Note]
-> Contact: 
-> `email`: mindongun123@gmail.com
-> facebook: facebook.com/md.6823
-> github: github.com/mindongun123
+#####  Contact: 
+> `email`: mindongun123@gmail.com  [Email](mailto:youremail@example.com) <br>
+> `facebook`: facebook.com/md.6823 [Facebook](https://facebook.com/md.6823) <br>
+> `github`: github.com/mindongun123 [Github](https://github.com/mindongun123) <br>
