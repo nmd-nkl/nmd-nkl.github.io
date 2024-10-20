@@ -14,7 +14,6 @@
 
 
 
----
 
 ### [Chương 1:  C++]() 
 
@@ -28,9 +27,8 @@
 
 
 
----
 
-#####  Contact: 
-> `email`: mindongun123@gmail.com  [Email](mailto:youremail@example.com) <br>
-> `facebook`: facebook.com/md.6823 [Facebook](https://facebook.com/md.6823) <br>
-> `github`: github.com/mindongun123 [Github](https://github.com/mindongun123) <br>
+####  Contact: 
+> Email: mindongun123@gmail.com  [Email](mailto:youremail@example.com) <br>
+> Facebook: facebook.com/md.6823 [Facebook](https://facebook.com/md.6823) <br>
+> Github: github.com/mindongun123 [Github](https://github.com/mindongun123) <br>
