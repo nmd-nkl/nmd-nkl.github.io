@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ex7.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 16px);
+	margin-left: 100px;
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-7">Bài 7</h1>
+<table>
+<thead>
+<tr>
+<th><a href="#t%E1%BA%A1o-project---b%E1%BB%91-c%E1%BB%A5c-l%C3%A0m-vi%E1%BB%87c---c%E1%BA%A5u-tr%C3%BAc-project">P1</a></th>
+<th><a href="#th%C3%A0nh-ph%E1%BA%A7n-scene">P2</a></th>
+<th><a href="#t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-gameobject">P3</a></th>
+<th><a href="#th%C3%A0nh-ph%E1%BA%A7n-camera">P4</a></th>
+<th><a href="#th%C3%A0nh-ph%E1%BA%A7n-spriterenderer">P5</a></th>
+<th><a href="#s%E1%BB%AD-d%E1%BB%A5ng-tag">P6</a></th>
+<th><a href="#sorting-layer-v%C3%A0-order-in-layer">P7</a></th>
+<th><a href="#v%C3%B2ng-%C4%91%E1%BB%9Di-c%E1%BB%A7a-m%E1%BB%99t-gameobject">P8</a></th>
+<th><a href="#ph%C6%B0%C6%A1ng-th%E1%BB%A9c-update-v%C3%A0-%C4%91%E1%BA%A1i-l%C6%B0%E1%BB%A3ng-timedeltatime">P9</a></th>
+<th><a href="#vector">P10</a></th>
+<th><a href="#t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-prefab">P11</a></th>
+<th><a href="#c%C3%A2u-l%E1%BB%87nh-instantiate-v%C3%A0-destroy">P12</a></th>
+<th><a href="#component">P13</a></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h2 id="t%E1%BA%A1o-project---b%E1%BB%91-c%E1%BB%A5c-l%C3%A0m-vi%E1%BB%87c---c%E1%BA%A5u-tr%C3%BAc-project">Tạo Project - Bố cục làm việc - Cấu trúc Project</h2>
+<ul>
+<li><code>Tạo Project</code>: Khi bắt đầu với Unity, bạn có thể tạo một project mới từ Unity Hub. Unity cung cấp nhiều mẫu project khác nhau như 2D, 3D, VR/AR, hay các templates khác tùy thuộc vào nhu cầu.
+Bố cục làm việc: Giao diện Unity bao gồm các panel chính:</li>
+<li><code>Scene View</code>: Nơi bạn chỉnh sửa cảnh.
+Game View: Hiển thị cách game sẽ được hiển thị khi chạy.</li>
+<li><code>Inspector</code>: Hiển thị thông tin chi tiết của các thành phần (<code>Components</code>) của <code>GameObject</code>.</li>
+<li><code>Hierarchy</code>: Hiển thị cấu trúc cây của các <code>GameObject</code> trong <code>Scene</code>.</li>
+<li><code>Project</code>: Hiển thị các tài nguyên (<code>assets</code>) trong project của bạn.</li>
+<li><code>Cấu trúc Project</code>: Thư mục <code>Assets</code> là nơi chứa các tài nguyên của project, bao gồm <code>textures</code>, <code>scripts</code>, <code>materials</code>, <code>prefabs</code> và <code>models</code>.</li>
+</ul>
+<h2 id="th%C3%A0nh-ph%E1%BA%A7n-scene">Thành phần Scene</h2>
+<ul>
+<li><code>Scene</code> là một không gian chứa các GameObject trong Unity. Mỗi Scene có thể chứa các yếu tố như nhân vật, môi trường, ánh sáng, camera, và các đối tượng tương tác khác. Bạn có thể lưu, tải và chuyển đổi giữa nhiều Scene khác nhau trong game.</li>
+</ul>
+<h2 id="t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-gameobject">Tìm hiểu về GameObject</h2>
+<ul>
+<li><code>GameObject</code> là đơn vị cơ bản trong Unity. Mọi đối tượng trong game, từ nhân vật, môi trường, camera cho đến UI đều là GameObject. Một GameObject chỉ là một container trống, và sức mạnh của nó đến từ các Component được thêm vào.</li>
+</ul>
+<h2 id="th%C3%A0nh-ph%E1%BA%A7n-camera">Thành phần Camera</h2>
+<ul>
+<li><code>Camera</code> là đối tượng dùng để hiển thị thế giới 2D hoặc 3D trên màn hình. Trong Unity, camera mặc định là camera 3D. Bạn có thể tùy chỉnh góc nhìn, vị trí và nhiều thuộc tính khác của camera để tạo ra góc nhìn phù hợp cho game của mình.</li>
+</ul>
+<h2 id="th%C3%A0nh-ph%E1%BA%A7n-spriterenderer">Thành phần SpriteRenderer</h2>
+<ul>
+<li><code>SpriteRenderer</code> là một component được sử dụng trong game 2D để hiển thị hình ảnh (sprites) trên màn hình. Component này chịu trách nhiệm render sprite của GameObject lên màn hình, cho phép bạn đặt hình ảnh như nhân vật, đối tượng, background, v.v.</li>
+</ul>
+<h2 id="s%E1%BB%AD-d%E1%BB%A5ng-tag">Sử dụng Tag</h2>
+<ul>
+<li><code>Tag</code> là một cách để gán các nhãn cho GameObject nhằm giúp phân loại chúng. Bạn có thể sử dụng Tags để tìm kiếm hoặc quản lý các đối tượng trong game, ví dụ, gán Tag &quot;Player&quot; cho nhân vật chính hoặc &quot;Enemy&quot; cho kẻ thù.</li>
+</ul>
+<h2 id="sorting-layer-v%C3%A0-order-in-layer">Sorting Layer và Order In Layer</h2>
+<ul>
+<li><code>Sorting Layer</code>: Trong game 2D, các đối tượng có thể nằm trên các lớp khác nhau để đảm bảo rằng chúng được hiển thị theo thứ tự mong muốn. Các layer này giúp bạn quản lý thứ tự hiển thị của các đối tượng.
+Order In Layer: Quyết định thứ tự hiển thị của các đối tượng trong cùng một Sorting Layer. Các giá trị cao hơn sẽ được render trước các giá trị thấp hơn.</li>
+</ul>
+<h2 id="v%C3%B2ng-%C4%91%E1%BB%9Di-c%E1%BB%A7a-m%E1%BB%99t-gameobject">Vòng đời của một GameObject</h2>
+<ul>
+<li>Các GameObject trong Unity tuân theo một vòng đời cố định, bao gồm:
+<ul>
+<li><code>Awake()</code>: Gọi khi GameObject được khởi tạo.</li>
+<li><code>Start()</code>: Gọi khi GameObject được kích hoạt.</li>
+<li><code>Update()</code>: Gọi mỗi khung hình để cập nhật logic.</li>
+<li><code>FixedUpdate()</code>: Gọi định kỳ với tốc độ khung hình cố định, dùng cho vật lý.</li>
+<li><code>LateUpdate()</code>: Gọi sau Update, thường dùng để đồng bộ camera hoặc các đối tượng khác sau khi logic chính được cập nhật.</li>
+<li><code>OnDestroy()</code>: Gọi khi GameObject bị hủy.</li>
+</ul>
+</li>
+</ul>
+<h2 id="ph%C6%B0%C6%A1ng-th%E1%BB%A9c-update-v%C3%A0-%C4%91%E1%BA%A1i-l%C6%B0%E1%BB%A3ng-timedeltatime">Phương thức Update và đại lượng Time.deltaTime</h2>
+<ul>
+<li><code>Update()</code> là phương thức chính được gọi mỗi frame trong game để xử lý các logic liên tục như di chuyển, kiểm tra điều kiện, hay xử lý sự kiện. Để đảm bảo sự mượt mà bất kể tốc độ khung hình, bạn thường sử dụng <code>Time.deltaTime</code> để tính toán sự thay đổi theo thời gian (từ frame trước đó).</li>
+</ul>
+<h2 id="vector">Vector</h2>
+<ul>
+<li><code>Vector</code> trong Unity được sử dụng để biểu diễn các đại lượng có hướng, như vị trí, vận tốc hay lực. Hai loại vector phổ biến nhất là:</li>
+<li><code>Vector2</code>: Dùng trong không gian 2D (X, Y).</li>
+<li><code>Vector3</code>: Dùng trong không gian 3D (X, Y, Z).</li>
+</ul>
+<h2 id="t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-prefab">Tìm hiểu về Prefab</h2>
+<ul>
+<li><code>Prefab</code> là một mẫu của GameObject đã được lưu lại để sử dụng lại nhiều lần trong game. Prefab cho phép bạn tạo một đối tượng và lưu nó, sau đó bạn có thể sử dụng lại hoặc instantiate nó ở bất kỳ đâu trong Scene mà không cần tạo lại từ đầu.</li>
+</ul>
+<h2 id="c%C3%A2u-l%E1%BB%87nh-instantiate-v%C3%A0-destroy">Câu lệnh Instantiate và Destroy</h2>
+<ul>
+<li><code>Instantiate()</code>: Được sử dụng để tạo ra một bản sao của GameObject hoặc Prefab trong game.</li>
+<li><code>Destroy()</code>: Được sử dụng để xóa một GameObject khỏi Scene khi nó không còn cần thiết.</li>
+</ul>
+<h2 id="component">Component</h2>
+<ul>
+<li><code>Component</code> là các thành phần giúp GameObject có các thuộc tính và hành vi. Mỗi GameObject có thể chứa nhiều Component như:
+<ul>
+<li><code>Transform</code>: Quản lý vị trí, xoay, và tỷ lệ của GameObject.</li>
+<li><code>Rigidbody</code>: Thêm thuộc tính vật lý cho GameObject, cho phép nó tương tác với thế giới vật lý.</li>
+<li><code>Collider</code>: Giúp GameObject có thể va chạm hoặc phát hiện va chạm với các đối tượng khác.</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

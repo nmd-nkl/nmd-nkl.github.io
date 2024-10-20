@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ex5.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 16px);
+	margin-left: 100px;
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-5">Bài 5</h1>
+<table>
+<thead>
+<tr>
+<th><a href="#oop">P1</a></th>
+<th><a href="#class">P2</a></th>
+<th><a href="#ph%C6%B0%C6%A1ng-th%E1%BB%A9c-kh%E1%BB%9Fi-t%E1%BA%A1o-constructor">P3</a></th>
+<th><a href="#ph%C6%B0%C6%A1ng-th%E1%BB%A9c-h%E1%BB%A7y-b%E1%BB%8F-destructor">P4</a></th>
+<th><a href="#k%E1%BA%BF-th%E1%BB%ABa-inheritance">P5</a></th>
+<th><a href="#%C4%91a-h%C3%ACnh">P6</a></th>
+<th><a href="#interface">P7</a></th>
+<th><a href="#n%E1%BA%A1p-ch%E1%BB%93ng-overload">P8</a></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h2 id="oop">OOP</h2>
+<ul>
+<li>
+<p><code>OOP</code> (Object-Oriented Programming) là một phương pháp lập trình dựa trên việc sử dụng đối tượng và lớp. Nó giúp chia nhỏ các vấn đề phức tạp thành các phần nhỏ hơn, dễ quản lý và phát triển hơn. <code>OOP</code> có 4 đặc trưng chính:</p>
+<ul>
+<li><code>Tính đóng gói (Encapsulation)</code>: Dữ liệu và các phương thức liên quan được đóng gói trong một đối tượng. Chỉ các thành phần bên trong đối tượng đó mới có thể truy cập được.</li>
+<li><code>Tính kế thừa (Inheritance)</code>: Một lớp có thể kế thừa các thuộc tính và phương thức của lớp khác.</li>
+<li><code>Tính đa hình (Polymorphism)</code>: Cho phép một phương thức hoặc thuộc tính có nhiều cách sử dụng khác nhau (thông qua <code>overload</code> hoặc <code>override</code>).</li>
+<li><code>Tính trừu tượng (Abstraction)</code>: Giấu đi các chi tiết thực thi phức tạp, chỉ cung cấp cho người dùng những thông tin cần thiết.</li>
+</ul>
+</li>
+</ul>
+<h2 id="class">Class</h2>
+<ul>
+<li>Lớp là một khuôn mẫu để tạo ra các đối tượng (<code>object</code>). Nó chứa các thuộc tính (dữ liệu) và phương thức (hành động) để mô tả hành vi và trạng thái của đối tượng</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Car</span>
+{
+    <span class="hljs-comment">// Thuộc tính</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> brand;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> model;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> year;
+
+    <span class="hljs-comment">// Phương thức</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"The car is starting."</span>);
+    }
+}
+
+<span class="hljs-comment">//Sử dụng:</span>
+Car myCar = <span class="hljs-keyword">new</span> Car();
+myCar.brand = <span class="hljs-string">"Toyota"</span>;
+myCar.model = <span class="hljs-string">"Corolla"</span>;
+myCar.year = <span class="hljs-number">2020</span>;
+
+Console.WriteLine(myCar.brand);  <span class="hljs-comment">// Output: Toyota</span>
+myCar.Start();  <span class="hljs-comment">// Output: The car is starting.</span>
+
+</div></code></pre>
+<h2 id="ph%C6%B0%C6%A1ng-th%E1%BB%A9c-kh%E1%BB%9Fi-t%E1%BA%A1o-constructor">Phương thức khởi tạo (Constructor)</h2>
+<ul>
+<li>
+<p><code>Constructor</code> là một phương thức đặc biệt được gọi khi một đối tượng của lớp được tạo. Nó thường dùng để khởi tạo giá trị ban đầu cho các thuộc tính của đối tượng.</p>
+</li>
+<li>
+<p>Tên của <code>constructor</code> phải trùng với tên của lớp.
+<code>Constructor</code> không có kiểu trả về (không cần <code>void</code> hay <code>int</code>)</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Car</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> brand;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> model;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> year;
+
+    <span class="hljs-comment">// Constructor</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Car</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> brand, <span class="hljs-keyword">string</span> model, <span class="hljs-keyword">int</span> year</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.brand = brand;
+        <span class="hljs-keyword">this</span>.model = model;
+        <span class="hljs-keyword">this</span>.year = year;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">$"<span class="hljs-subst">{brand}</span> <span class="hljs-subst">{model}</span> is starting."</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Tạo một đối tượng Car và truyền giá trị cho constructor</span>
+        Car myCar = <span class="hljs-keyword">new</span> Car(<span class="hljs-string">"Honda"</span>, <span class="hljs-string">"Civic"</span>, <span class="hljs-number">2021</span>);
+        myCar.Start();  <span class="hljs-comment">// Output: Honda Civic is starting.</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li><code>Constructor</code> mặc định: Nếu bạn không định nghĩa <code>constructor</code>, C# sẽ cung cấp một <code>constructor</code> mặc định không tham số.</li>
+</ul>
+<h2 id="ph%C6%B0%C6%A1ng-th%E1%BB%A9c-h%E1%BB%A7y-b%E1%BB%8F-destructor">Phương thức hủy bỏ (Destructor)</h2>
+<ul>
+<li>
+<p><code>Destructor</code> là phương thức được gọi khi đối tượng bị hủy để giải phóng tài nguyên. Trong C#, <code>destructor</code> hiếm khi được sử dụng vì hệ thống quản lý bộ nhớ tự động (<code>garbage collector</code>) sẽ quản lý việc giải phóng tài nguyên. <code>Destructor</code> thường được dùng khi cần giải phóng tài nguyên không quản lý bởi bộ nhớ (ví dụ: tài nguyên hệ thống, file, kết nối cơ sở dữ liệu).</p>
+</li>
+<li>
+<p><code>Destructor</code> có cùng tên với lớp, nhưng có dấu ~ ở trước.</p>
+</li>
+<li>
+<p><code>Destructor</code> không có tham số và không thể <code>overload</code></p>
+</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Car</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> brand;
+
+    <span class="hljs-comment">// Constructor</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Car</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> brand</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.brand = brand;
+        Console.WriteLine(<span class="hljs-string">$"<span class="hljs-subst">{brand}</span> is created."</span>);
+    }
+
+    <span class="hljs-comment">// Destructor</span>
+    ~Car()
+    {
+        Console.WriteLine(<span class="hljs-string">$"<span class="hljs-subst">{brand}</span> is destroyed."</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Car myCar = <span class="hljs-keyword">new</span> Car(<span class="hljs-string">"Ford"</span>);
+        <span class="hljs-comment">// Destructor sẽ tự động được gọi khi đối tượng bị hủy (khi chương trình kết thúc).</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li><code>Lưu ý</code>: <code>Destructor</code> được gọi tự động bởi <code>garbage collector</code> khi đối tượng không còn được sử dụng</li>
+</ul>
+<h2 id="k%E1%BA%BF-th%E1%BB%ABa-inheritance">Kế thừa (Inheritance)</h2>
+<ul>
+<li><code>Kế thừa</code> là một trong những đặc trưng của <code>OOP</code> cho phép một lớp (gọi là lớp con) kế thừa các thuộc tính và phương thức từ một lớp khác (gọi là lớp cha). Điều này giúp tái sử dụng mã và tạo ra cấu trúc phân cấp.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ParentClass</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Display</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"This is a method from the Parent Class."</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ChildClass</span> : <span class="hljs-title">ParentClass</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Show</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"This is a method from the Child Class."</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        ChildClass child = <span class="hljs-keyword">new</span> ChildClass();
+        child.Display();  <span class="hljs-comment">// Output: This is a method from the Parent Class.</span>
+        child.Show();     <span class="hljs-comment">// Output: This is a method from the Child Class.</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li><code>Lưu ý</code>: Trong C#, một lớp chỉ có thể kế thừa từ một lớp cha (kế thừa đơn). Tuy nhiên, một lớp có thể thực hiện nhiều giao diện.</li>
+</ul>
+<h2 id="%C4%91a-h%C3%ACnh">Đa Hình</h2>
+<ul>
+<li>
+<p><code>Đa hình</code> cho phép các phương thức có cùng tên nhưng hành vi khác nhau tùy theo ngữ cảnh.</p>
+</li>
+<li>
+<p>Có hai loại đa hình:</p>
+<ul>
+<li>đa hình biên dịch (<code>compile-time</code>)</li>
+<li>đa hình thời gian chạy (<code>runtime</code>).</li>
+</ul>
+</li>
+<li>
+<p>Đa hình biên dịch (<code>Method Overloading</code>): Nạp chồng phương thức cho phép định nghĩa nhiều phương thức có cùng tên nhưng khác tham số (số lượng hoặc kiểu tham số).</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Calculator</span>
+{
+    <span class="hljs-comment">// Nạp chồng phương thức</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> a + b;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> a, <span class="hljs-keyword">double</span> b</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> a + b;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> a + b + c;
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Calculator calc = <span class="hljs-keyword">new</span> Calculator();
+        Console.WriteLine(calc.Add(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>));         <span class="hljs-comment">// Output: 15</span>
+        Console.WriteLine(calc.Add(<span class="hljs-number">5.5</span>, <span class="hljs-number">10.2</span>));     <span class="hljs-comment">// Output: 15.7</span>
+        Console.WriteLine(calc.Add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>));        <span class="hljs-comment">// Output: 6</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>Đa hình thời gian chạy (<code>Method Overriding</code>): Khi một lớp con định nghĩa lại phương thức đã được định nghĩa trong lớp cha.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Animal speaks"</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> : <span class="hljs-title">Animal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Dog barks"</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Animal myDog = <span class="hljs-keyword">new</span> Dog();
+        myDog.Speak();  <span class="hljs-comment">// Output: Dog barks</span>
+    }
+}
+</div></code></pre>
+<h2 id="interface">Interface</h2>
+<ul>
+<li><code>Interface</code> định nghĩa một tập hợp các phương thức mà lớp thực thi phải triển khai. <code>Interface</code> không thể chứa các thuộc tính, phương thức, hoặc <code>constructor</code> mà không có thân phương thức (body).</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IAnimal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Cat</span> : <span class="hljs-title">IAnimal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Cat meows"</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> : <span class="hljs-title">IAnimal</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Speak</span>(<span class="hljs-params"></span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Dog barks"</span>);
+    }
+}
+
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        IAnimal myCat = <span class="hljs-keyword">new</span> Cat();
+        IAnimal myDog = <span class="hljs-keyword">new</span> Dog();
+
+        myCat.Speak();  <span class="hljs-comment">// Output: Cat meows</span>
+        myDog.Speak();  <span class="hljs-comment">// Output: Dog barks</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li><code>Lợi ích</code>: <code>Interfaces</code> giúp đạt được tính đa hình và tách biệt giữa các phương thức đã định nghĩa và cách chúng được triển khai, cho phép xây dựng các hệ thống linh hoạt hơn.</li>
+</ul>
+<h2 id="n%E1%BA%A1p-ch%E1%BB%93ng-overload">Nạp chồng (Overload)</h2>
+<ul>
+<li>
+<p><code>Nạp chồng</code> (<code>overloading</code>) cho phép bạn định nghĩa nhiều phương thức hoặc toán tử với cùng tên nhưng khác nhau về số lượng hoặc kiểu tham số. Điều này giúp cải thiện khả năng đọc và sử dụng mã.</p>
+</li>
+<li>
+<p>Nạp chồng phương thức: Được thực hiện khi có cùng tên nhưng khác số lượng hoặc kiểu tham số.</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Display</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Show</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> number</span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Number: "</span> + number);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Show</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> text</span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">"Text: "</span> + text);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Display display = <span class="hljs-keyword">new</span> Display();
+        display.Show(<span class="hljs-number">5</span>);          <span class="hljs-comment">// Output: Number: 5</span>
+        display.Show(<span class="hljs-string">"Hello"</span>);    <span class="hljs-comment">// Output: Text: Hello</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>Nạp chồng toán tử: Trong C#, bạn cũng có thể nạp chồng các toán tử, cho phép bạn định nghĩa cách các toán tử hoạt động với các kiểu dữ liệu tùy chỉnh.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> X { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Y { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Point <span class="hljs-keyword">operator</span> +(Point p1, Point p2)
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point { X = p1.X + p2.X, Y = p1.Y + p2.Y };
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>)</span>
+    {
+        Point p1 = <span class="hljs-keyword">new</span> Point { X = <span class="hljs-number">5</span>, Y = <span class="hljs-number">10</span> };
+        Point p2 = <span class="hljs-keyword">new</span> Point { X = <span class="hljs-number">3</span>, Y = <span class="hljs-number">7</span> };
+        Point result = p1 + p2;
+
+        Console.WriteLine(<span class="hljs-string">$"Result: X = <span class="hljs-subst">{result.X}</span>, Y = <span class="hljs-subst">{result.Y}</span>"</span>);  <span class="hljs-comment">// Output: Result: X = 8, Y = 17</span>
+    }
+}
+</div></code></pre>
+
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ex8.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 16px);
+	margin-left: 100px;
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-8">Bài 8</h1>
+<table>
+<thead>
+<tr>
+<th><a href="#rigidbody">P1</a></th>
+<th><a href="#va-ch%E1%BA%A1m-trong-game-collision-v%C3%A0-trigger">P2</a></th>
+<th><a href="#b%E1%BA%AFt-va-ch%E1%BA%A1m-collision">P3</a></th>
+<th><a href="#b%E1%BA%AFt-va-ch%E1%BA%A1m-trigger">P4</a></th>
+<th><a href="#ienumerator">P5</a></th>
+<th><a href="#invoke">P6</a></th>
+<th><a href="#timescale">P7</a></th>
+<th><a href="#gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-animation">P8</a></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h2 id="rigidbody">Rigidbody</h2>
+<ul>
+<li><code>Rigidbody</code> là một thành phần vật lý trong Unity, được sử dụng để thêm các thuộc tính vật lý như trọng lực, lực va chạm, và sự tương tác vật lý cho GameObject. Khi thêm Rigidbody vào GameObject, đối tượng sẽ bị ảnh hưởng bởi các lực vật lý như trọng lực và va chạm.</li>
+<li><code>Mass</code>: Khối lượng của đối tượng, ảnh hưởng đến mức độ bị tác động bởi lực.</li>
+<li><code>Drag</code>: Lực cản làm chậm đối tượng khi nó di chuyển.</li>
+<li><code>Angular Drag</code>: Lực cản xoay làm chậm sự xoay của đối tượng.</li>
+<li><code>Use Gravity</code>: Cho phép đối tượng chịu tác động của trọng lực.</li>
+<li><code>Is Kinematic</code>: Khi được bật, đối tượng sẽ không bị ảnh hưởng bởi các lực vật lý và chỉ di chuyển khi bạn thay đổi các thuộc tính thủ công.</li>
+</ul>
+<h2 id="va-ch%E1%BA%A1m-trong-game-collision-v%C3%A0-trigger">Va chạm trong game (Collision và Trigger)</h2>
+<ul>
+<li><code>Collision</code>: Là sự va chạm vật lý giữa các GameObject có Rigidbody và Collider. Unity sẽ xử lý các tương tác vật lý giữa các đối tượng này và có thể bắt các sự kiện để xử lý thêm.
+-<code>Trigger</code>: Là loại Collider không tạo ra va chạm vật lý mà chỉ phát hiện khi một đối tượng khác đi vào vùng của nó. Trigger thường dùng để kích hoạt các sự kiện như mở cửa, bật hiệu ứng hoặc thay đổi trạng thái game.</li>
+</ul>
+<h2 id="b%E1%BA%AFt-va-ch%E1%BA%A1m-collision">Bắt va chạm Collision</h2>
+<ul>
+<li><code>Collision Detection</code>: Khi hai đối tượng có Collider và ít nhất một trong số đó có Rigidbody, Unity sẽ tự động bắt sự va chạm. Để bắt sự kiện va chạm, bạn có thể sử dụng các phương thức sau:
+<ul>
+<li><code>OnCollisionEnter()</code>: Được gọi khi GameObject bắt đầu va chạm với đối tượng khác.</li>
+<li><code>OnCollisionStay()</code>: Được gọi liên tục khi GameObject vẫn còn va chạm với đối tượng khác.</li>
+<li><code>OnCollisionExit()</code>: Được gọi khi GameObject dừng va chạm với đối tượng khác.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnCollisionEnter</span>(<span class="hljs-params">Collision collision</span>)</span> {
+    Debug.Log(<span class="hljs-string">"Va chạm với: "</span> + collision.gameObject.name);
+}
+</div></code></pre>
+<h2 id="b%E1%BA%AFt-va-ch%E1%BA%A1m-trigger">Bắt va chạm Trigger</h2>
+<ul>
+<li>Khi bạn sử dụng <code>Collider</code> ở chế độ <code>Trigger</code> (bật checkbox &quot;<code>Is Trigger</code>&quot;), Unity sẽ không xử lý va chạm vật lý mà sẽ chỉ phát hiện khi một đối tượng khác đi vào vùng Trigger. Để bắt sự kiện Trigger, bạn sử dụng các phương thức:
+<ul>
+<li><code>OnTriggerEnter()</code>: Được gọi khi một GameObject đi vào vùng Trigger.</li>
+<li><code>OnTriggerStay()</code>: Được gọi liên tục khi một GameObject ở trong vùng Trigger.</li>
+<li><code>OnTriggerExit()</code>: Được gọi khi một GameObject rời khỏi vùng Trigger.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnTriggerEnter</span>(<span class="hljs-params">Collider other</span>)</span> {
+    Debug.Log(<span class="hljs-string">"Đối tượng đi vào Trigger: "</span> + other.gameObject.name);
+}
+</div></code></pre>
+<h2 id="ienumerator">IEnumerator</h2>
+<ul>
+<li><code>IEnumerator</code> là một giao diện trong C# được sử dụng để tạo ra các Coroutines trong Unity. Coroutines cho phép bạn tạm dừng quá trình thực thi của một đoạn code trong một khoảng thời gian mà không cần chặn toàn bộ game. Điều này rất hữu ích khi bạn cần thực hiện các tác vụ theo thời gian như delay, chuyển cảnh, hoặc chờ hiệu ứng hoàn thành.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function">IEnumerator <span class="hljs-title">DelayExample</span>(<span class="hljs-params"></span>)</span> {
+    Debug.Log(<span class="hljs-string">"Bắt đầu"</span>);
+    <span class="hljs-function"><span class="hljs-keyword">yield</span> return new <span class="hljs-title">WaitForSeconds</span>(<span class="hljs-params"><span class="hljs-number">2</span></span>)</span>; <span class="hljs-comment">// Dừng 2 giây</span>
+    Debug.Log(<span class="hljs-string">"Kết thúc sau 2 giây"</span>);
+}
+</div></code></pre>
+<h2 id="invoke">Invoke</h2>
+<ul>
+<li><code>Invoke</code> là một phương thức trong Unity giúp bạn gọi một hàm sau một khoảng thời gian delay mà không cần phải sử dụng Coroutines. Nó rất đơn giản và trực tiếp khi bạn chỉ cần thực hiện một hành động duy nhất sau một thời gian nhất định.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span> {
+    Invoke(<span class="hljs-string">"MyFunction"</span>, <span class="hljs-number">3f</span>); <span class="hljs-comment">// Gọi MyFunction sau 3 giây</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MyFunction</span>(<span class="hljs-params"></span>)</span> {
+    Debug.Log(<span class="hljs-string">"Được gọi sau 3 giây"</span>);
+}
+</div></code></pre>
+<h2 id="timescale">TimeScale</h2>
+<ul>
+<li><code>Time.timeScale</code> là một thuộc tính cho phép bạn điều chỉnh tốc độ thời gian của game. Giá trị mặc định là 1, nghĩa là thời gian chạy bình thường. Bạn có thể thay đổi giá trị này để tăng tốc, giảm tốc hoặc tạm dừng game.</li>
+</ul>
+<pre class="hljs"><code><div>Time.timeScale = <span class="hljs-number">0</span>; để tạm dừng game.
+Time.timeScale = <span class="hljs-number">0.5f</span>; để giảm tốc độ game xuống một nửa.
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PauseGame</span>(<span class="hljs-params"></span>)</span> {
+    Time.timeScale = <span class="hljs-number">0</span>; <span class="hljs-comment">// Tạm dừng game</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ResumeGame</span>(<span class="hljs-params"></span>)</span> {
+    Time.timeScale = <span class="hljs-number">1</span>; <span class="hljs-comment">// Khôi phục tốc độ bình thường</span>
+}
+</div></code></pre>
+<h2 id="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-animation">Giới thiệu về Animation</h2>
+<ul>
+<li>
+<p><code>Animation</code> là một phần quan trọng trong việc tạo ra trải nghiệm trực quan và sống động cho người chơi. Unity hỗ trợ hệ thống Animator để quản lý và điều khiển các animation. Bạn có thể tạo các trạng thái animation khác nhau và liên kết chúng với các điều kiện để chuyển đổi giữa các trạng thái.</p>
+</li>
+<li>
+<p>Các thành phần chính của hệ thống Animation:</p>
+<ul>
+<li><code>Animator Controller</code>: Điều khiển các trạng thái animation và chuyển đổi giữa chúng.</li>
+<li><code>Animation Clip</code>: Là các đoạn animation được tạo ra hoặc nhập vào Unity từ các công cụ như Blender, Maya hoặc phần mềm 2D.</li>
+<li><code>Parameter</code>: Các biến được sử dụng để điều khiển việc chuyển đổi giữa các trạng thái (ví dụ: bool, float, trigger).</li>
+</ul>
+</li>
+<li>
+<p>Ví dụ: Bạn có thể sử dụng trigger để chuyển đổi từ trạng thái đứng yên sang chạy khi người chơi nhấn phím di chuyển:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>Animator animator = GetComponent&lt;Animator&gt;();
+animator.SetTrigger(<span class="hljs-string">"Run"</span>);
+</div></code></pre>
+
+</body>
+</html>
