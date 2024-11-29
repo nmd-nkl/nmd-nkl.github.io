@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[GCC Training] Buổi 7_String & Mảng 2 chiều.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bu%E1%BB%95i-6-string--m%E1%BA%A3ng-2-chi%E1%BB%81u"><strong>BUỔI 6: STRING &amp; MẢNG 2 CHIỀU</strong></h1>
+<hr>
+<ul>
+<li><a href="#string"><strong>STRING</strong></a>
+<ul>
+<li><a href="#c%C3%A1ch-khai-b%C3%A1o">Cách khai báo</a></li>
+<li><a href="#c%C3%A1c-thao-t%C3%A1c-c%C6%A1-b%E1%BA%A3n">Các thao tác cơ bản</a></li>
+<li><a href="#c%C3%A1c-thao-t%C3%A1c-v%E1%BB%9Bi-h%C3%A0m">Các thao tác với hàm</a></li>
+<li><a href="#luy%E1%BB%87n-t%E1%BA%ADp-1">Luyện tập 1</a></li>
+</ul>
+</li>
+<li><a href="#m%E1%BA%A3ng-2-chi%E1%BB%81u"><strong>MẢNG 2 CHIỀU</strong></a>
+<ul>
+<li><a href="#kh%E1%BB%9Fi-t%E1%BA%A1o-m%E1%BA%A3ng-2-chi%E1%BB%81u">Khởi Tạo Mảng 2 Chiều</a></li>
+<li><a href="#l%C6%B0u-%C3%BD-b%E1%BB%95-sung">Lưu ý, bổ sung</a></li>
+<li><a href="#luy%E1%BB%87n-t%E1%BA%ADp-2">Luyện tập 2</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="string"><strong>STRING</strong></h2>
+<h3 id="kh%C3%A1i-ni%E1%BB%87m"><strong>Khái niệm:</strong></h3>
+<ul>
+<li>Là 1 mảng gồm các ký tự kiểu char được lưu giữ dưới dạng mã ASCII.</li>
+<li>Dùng để chứa và xử lý văn bản như tên, số điện thoại, email.</li>
+</ul>
+<h3 id="c%C3%A1ch-khai-b%C3%A1o">Cách khai báo:</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">//Khởi tạo</span>
+<span class="hljs-built_in">string</span> ten_String;
+<span class="hljs-comment">//Khởi tạo và gán giá trị</span>
+<span class="hljs-built_in">string</span> ten = <span class="hljs-string">"Thông"</span>;
+</div></code></pre>
+<h3 id="c%C3%A1c-thao-t%C3%A1c-c%C6%A1-b%E1%BA%A3n">Các thao tác cơ bản</h3>
+<h4 id="nh%E1%BA%ADp-x%C3%A2u"><strong><code>Nhập xâu</code></strong></h4>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s;
+<span class="hljs-comment">//Nhập xâu, không bao gồm dấu cách</span>
+<span class="hljs-built_in">cin</span> &gt;&gt; s;
+<span class="hljs-comment">//Nhập xâu, bao gồm cả dấu cách</span>
+getline(<span class="hljs-built_in">cin</span>, s);
+</div></code></pre>
+<p><code>Note</code>: Nếu dùng <code>cin</code> trước <code>getline</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> t; <span class="hljs-built_in">cin</span> &gt;&gt; t; <span class="hljs-comment">//Ví dụ: nhập testcase</span>
+<span class="hljs-comment">//LƯU Ý:</span>
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"\n"</span>); <span class="hljs-comment">//xoá dấu '\n' trong buffer</span>
+<span class="hljs-comment">//Or:</span>
+<span class="hljs-built_in">cin</span>.ignore(); <span class="hljs-comment">//ignore 1 lần cin</span>
+<span class="hljs-comment">//rồi mới getline nếu không getline tiếp theo sẽ bị nhập vào '\n'</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">//Truy xuất các ký tự của chuỗi: Đếm từ index 0</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; s[<span class="hljs-number">0</span>]; <span class="hljs-comment">//in ra kí tự đầu tiên</span>
+
+<span class="hljs-comment">//Ghép các chuỗi vào với nhau</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; s1 + s2;
+
+<span class="hljs-comment">//Copy chuỗi này sang chuỗi khác</span>
+s1 = s2;
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>So sánh 2 chuỗi</strong> (dùng trực tiếp các toán tử so sánh): <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, ...</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h3 id="c%C3%A1c-thao-t%C3%A1c-v%E1%BB%9Bi-h%C3%A0m">Các thao tác với hàm</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">//Hàm trả về độ dài của string</span>
+str.length(); <span class="hljs-comment">//chỉ riêng cho xâu kí tự</span>
+str.size(); <span class="hljs-comment">//dùng cho nhiều loại khác như vector</span>
+
+<span class="hljs-comment">//Thêm vào sau hoặc xóa sau của chuỗi 1 ký tự</span>
+str.push_back();
+str.pop_back();
+
+<span class="hljs-comment">//Trích xuất 1 phần của chuỗi</span>
+str.substr(<span class="hljs-number">7</span>, <span class="hljs-number">5</span>); <span class="hljs-comment">// Trích xuất 5 ký tự từ vị trí 7</span>
+
+<span class="hljs-comment">// Tìm kiếm</span>
+<span class="hljs-keyword">size_t</span> pos = s.find(<span class="hljs-string">"World"</span>);
+<span class="hljs-keyword">if</span> (pos != <span class="hljs-built_in">string</span>::npos) {
+  <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Tim thay 'World' tại: "</span> &lt;&lt; pos; <span class="hljs-comment">//trả về vị trí tìm thấy đầu tiên</span>
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"khong tim thay"</span>;
+}
+</div></code></pre>
+<p><strong>Hàm <code>str.erase(vị trí, chiều dài)</code>:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s = <span class="hljs-string">"Hello, world!"</span>;
+
+<span class="hljs-comment">// Xóa 7 ký tự bắt đầu từ vị trí 7</span>
+s.erase(<span class="hljs-number">7</span>, <span class="hljs-number">7</span>);
+<span class="hljs-built_in">cout</span> &lt;&lt; s; <span class="hljs-comment">// Output: "Hello, "</span>
+
+<span class="hljs-comment">// Xóa từ vị trí 5 đến hết chuỗi</span>
+s.erase(<span class="hljs-number">5</span>);
+<span class="hljs-built_in">cout</span> &lt;&lt; s; <span class="hljs-comment">// Output: "Hello"</span>
+</div></code></pre>
+<p><strong>Hàm <code>str.insert(vị trí, chuỗi con)</code>:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s = <span class="hljs-string">"Hello!"</span>;
+
+<span class="hljs-comment">// Chèn một chuỗi con</span>
+s.insert(<span class="hljs-number">5</span>, <span class="hljs-string">", world"</span>);
+<span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// Output: "Hello, world!"</span>
+</div></code></pre>
+<p><strong>Hàm `str.replace(vị trí, chiều dài, chuỗi con):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Thay thế chuỗi con</span>
+<span class="hljs-built_in">string</span> s = <span class="hljs-string">"Hello, world!"</span>;
+s.replace(<span class="hljs-number">7</span>, <span class="hljs-number">5</span>, <span class="hljs-string">"everyone"</span>);
+<span class="hljs-built_in">cout</span> &lt;&lt; s; <span class="hljs-comment">// Output: "Hello, everyone!"</span>
+</div></code></pre>
+<p><strong>Hàm đổi từ string sang số &amp; ngược lại:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s = <span class="hljs-string">"123"</span>;
+<span class="hljs-keyword">int</span> n = stoi(s); <span class="hljs-comment">// n = 123 (int)</span>
+<span class="hljs-comment">//Hoặc stoll: long long</span>
+<span class="hljs-comment">//stof: float</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> n = <span class="hljs-number">123</span>;
+<span class="hljs-built_in">string</span> s = to_string(n); <span class="hljs-comment">// s = "123"</span>
+
+<span class="hljs-built_in">string</span> repeat = <span class="hljs-built_in">string</span>(<span class="hljs-number">5</span>, <span class="hljs-string">'*'</span>); <span class="hljs-comment">// repeat = "*****"</span>
+</div></code></pre>
+<p><strong>Hàm <code>reverse(s.begin(), s.end())</code>:</strong> Đảo ngược chuỗi.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s = <span class="hljs-string">"abc"</span>;
+reverse(s.begin(), s.end()); <span class="hljs-comment">// "cba"</span>
+</div></code></pre>
+<h3 id="luy%E1%BB%87n-t%E1%BA%ADp-1"><strong>Luyện tập 1</strong></h3>
+<h4 id="b%C3%A0i-1">Bài 1:</h4>
+<table>
+<thead>
+<tr>
+<th>Kiểm tra xem số đó có phải là số đẹp (thuận nghịch và chỉ toàn chữ số chẵn).</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h4 id="b%C3%A0i-2">Bài 2:</h4>
+<table>
+<thead>
+<tr>
+<th>Kiểm tra xem 1 xâu có phải là xâu Pangram không (xâu có đầy đủ ký tự từ a-z, không phân biệt hoa thường). (không dùng set, mảng đánh dấu, các kiến thức chưa học)</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h2 id="m%E1%BA%A3ng-2-chi%E1%BB%81u"><strong>MẢNG 2 CHIỀU</strong></h2>
+<h3 id="kh%C3%A1i-ni%E1%BB%87m-m%E1%BA%A3ng-2-chi%E1%BB%81u"><strong>Khái niệm mảng 2 chiều:</strong></h3>
+<p>Mảng nhiều chiều trong C++ là một trong các khái niệm cơ bản trong lập trình. Mảng nhiều chiều còn được coi là mảng kiểu hình chữ nhật trong C ++. Nó có thể là hai chiều, ba chiều, hoặc nhiều hơn ba chiều. Dữ liệu được lưu trữ dưới dạng bảng (hàng và cột), còn được coi là một ma trận.</p>
+<h3 id="kh%E1%BB%9Fi-t%E1%BA%A1o-m%E1%BA%A3ng-2-chi%E1%BB%81u"><strong>Khởi Tạo Mảng 2 Chiều:</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>&lt;Kiểu Dữ Liệu&gt; _TênMảng [số hàng] [số cột]</strong></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a[n][m]; <span class="hljs-comment">//mảng a có n hàng, m cột</span>
+</div></code></pre>
+<h4 id="nh%E1%BA%ADp-v%C3%A0-xu%E1%BA%A5t-d%C3%B9ng-2-v%C3%B2ng-for-l%E1%BB%93ng-nhau">Nhập và xuất: dùng 2 vòng for lồng nhau</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) {
+    <span class="hljs-built_in">cin</span> &gt;&gt; a[i][j];
+  }
+}
+</div></code></pre>
+<h3 id="l%C6%B0u-%C3%BD-b%E1%BB%95-sung"><strong>Lưu ý, bổ sung:</strong></h3>
+<p>Muốn truyền mảng 2 chiều vào hàm con phải xác định trước số hàng số cột.</p>
+<h3 id="luy%E1%BB%87n-t%E1%BA%ADp-2"><strong>Luyện tập 2</strong></h3>
+<h4 id="b%C3%A0i-1">Bài 1:</h4>
+<table>
+<thead>
+<tr>
+<th>Cho 1 ma trận n*m in ra ma trận chuyển vị của ma trận đó.</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h4 id="b%C3%A0i-2">Bài 2:</h4>
+<table>
+<thead>
+<tr>
+<th>Tìm tổng lớn nhất của 1 hàng hoặc cột bất kỳ.</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+</body>
+</html>

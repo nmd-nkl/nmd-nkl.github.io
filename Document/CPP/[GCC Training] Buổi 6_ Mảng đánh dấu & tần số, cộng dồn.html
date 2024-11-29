@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[GCC Training] Buổi 6_ Mảng đánh dấu & tần số, cộng dồn.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="bu%E1%BB%95i-7-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u-t%E1%BA%A7n-s%E1%BB%91-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n-m%E1%BA%A3ng-hi%E1%BB%87u"><strong>BUỔI 7: MẢNG ĐÁNH DẤU, TẦN SỐ, MẢNG CỘNG DỒN, MẢNG HIỆU</strong></h3>
+<hr>
+<h2 id="m%E1%BB%A5c-l%E1%BB%A5c">Mục lục</h2>
+<ul>
+<li><a href="#m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u--t%E1%BA%A7n-s%E1%BB%91">MẢNG ĐÁNH DẤU &amp; TẦN SỐ</a>
+<ul>
+<li><a href="#b%C3%A0i-to%C3%A1n">Bài toán</a></li>
+<li><a href="#c%C3%A1ch-l%C3%A0m-b%E1%BA%B1ng-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u">Cách làm bằng mảng đánh dấu</a></li>
+<li><a href="#%C6%B0u--nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u">Ưu &amp; Nhược điểm của mảng đánh dấu</a></li>
+</ul>
+</li>
+<li><a href="#m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n-1-chi%E1%BB%81u">MẢNG CỘNG DỒN 1 CHIỀU</a>
+<ul>
+<li><a href="#b%C3%A0i-to%C3%A1n-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n">Bài toán mảng cộng dồn</a></li>
+<li><a href="#c%C3%A1ch-l%C3%A0m-b%E1%BA%B1ng-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n">Cách làm bằng mảng cộng dồn</a></li>
+<li><a href="#%C6%B0u--nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n">Ưu &amp; Nhược điểm của mảng cộng dồn</a></li>
+</ul>
+</li>
+<li><a href="#l%C6%B0u-%C3%BD-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u--c%E1%BB%99ng-d%E1%BB%93n">Lưu ý Mảng đánh dấu &amp; Cộng dồn</a></li>
+<li><a href="#b%C3%A0i-t%E1%BA%ADp">BÀI TẬP</a>
+<ul>
+<li><a href="#1-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n">1. Mảng cộng dồn</a></li>
+<li><a href="#2-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n-1-chi%E1%BB%81u">2. Mảng cộng dồn 1 chiều</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u--t%E1%BA%A7n-s%E1%BB%91"><strong>MẢNG ĐÁNH DẤU &amp; TẦN SỐ</strong></h1>
+<h3 id="b%C3%A0i-to%C3%A1n"><strong>Bài toán:</strong></h3>
+<p>Cho 1 mảng có <strong>n</strong> phần tử, nhập vào <strong>n</strong> số <strong>a[i]</strong> là phần tử của mảng. Cho <strong>Q</strong> truy vấn, mỗi truy vấn nhập số <strong>X</strong>. In ra “Yes” nếu số X có trong mảng và “No” nếu không có trong mảng.</p>
+<h3 id="c%C3%A1ch-l%C3%A0m-ng%C3%A2y-th%C6%A1"><strong>Cách làm Ngây thơ:</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> q; <span class="hljs-built_in">cin</span> &gt;&gt; q;
+<span class="hljs-keyword">while</span> (q--) {
+    <span class="hljs-keyword">int</span> so, timThay = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; so;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-keyword">if</span> (a[i] == so) {
+            timThay = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+    <span class="hljs-keyword">if</span> (timThay == <span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Yes\n"</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"No\n"</span>;
+}
+
+</div></code></pre>
+<p>Với cách làm này, nếu phần tử không có trong mảng, với mỗi truy vấn đều tốn N câu lệnh <strong>(O(n))</strong></p>
+<h3 id="c%C3%A1ch-l%C3%A0m-b%E1%BA%B1ng-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u"><strong>Cách làm bằng mảng đánh dấu:</strong></h3>
+<p>Lấy giá trị của mảng <strong>a[i]</strong> làm chỉ số của mảng đánh dấu freq[].</p>
+<p>Mỗi truy vấn chỉ mất 1 phép tính.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> freq[maxVal + <span class="hljs-number">5</span>];
+
+<span class="hljs-comment">// Khởi tạo mảng</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= maxVal + <span class="hljs-number">5</span>; i++)
+    freq[i] = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    freq[a[i]]++; <span class="hljs-comment">// Đánh dấu</span>
+
+<span class="hljs-keyword">int</span> q; <span class="hljs-built_in">cin</span> &gt;&gt; q;
+
+<span class="hljs-keyword">while</span> (q--) {
+    <span class="hljs-keyword">int</span> x;
+    <span class="hljs-built_in">cin</span> &gt;&gt; x;
+
+    <span class="hljs-keyword">if</span> (freq[x]) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Yes\n"</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"No\n"</span>;
+}
+</div></code></pre>
+<h3 id="%C6%B0u--nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u"><strong><code>Ưu &amp; Nhược điểm của mảng đánh dấu:</code></strong></h3>
+<p><strong><code>Ưu</code>:</strong> Nhanh hơn, mỗi truy vấn chỉ mất O(1)</p>
+<p><strong><code>Nhược</code>:</strong> Tốn thêm bộ nhớ để lưu trữ mảng freq[] (không cần thiết nếu Q = 1)</p>
+<p><strong>[Nói thêm về: Khai báo mảng ngoài hàm main]</strong></p>
+<p>Cách xử lý khi bạn muốn khai báo mảng cỡ $10^6$ hoặc $10^7$ phần tử mà không bị tràn stack đó là khai báo mảng ở <strong>phạm vi toàn cục</strong></p>
+<p>Khi bạn khai báo trong main thì vùng nhớ cấp phát để lưu mảng là vùng nhớ <code>stack</code> (tương đối nhỏ) còn khi bạn khai báo mảng ngoài main thì vùng nhớ cấp phát cho mảng là vùng nhớ <code>Uninitialized data segment</code>.</p>
+<hr>
+<h1 id="m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n-1-chi%E1%BB%81u"><strong>MẢNG CỘNG DỒN 1 CHIỀU</strong></h1>
+<h3 id="b%C3%A0i-to%C3%A1n-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n"><strong>Bài toán mảng cộng dồn:</strong></h3>
+<p>Cho 1 mảng có <strong>n</strong> phần tử, nhập vào <strong>n</strong> số <strong>a[i]</strong> là phần tử của mảng. Cho <strong>Q</strong> truy vấn, mỗi truy vấn nhập 2 số <strong>L, R</strong>. In ra tổng của dãy <strong>a[L] + a[L+1] + … a[R]</strong> với mỗi truy vấn.</p>
+<h3 id="c%C3%A1ch-l%C3%A0m-ng%C3%A2y-th%C6%A1"><strong>Cách làm Ngây thơ:</strong></h3>
+<p>Mỗi truy vấn thực hiện L-R+1 câu lệnh</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> Q;
+
+<span class="hljs-built_in">cin</span> &gt;&gt; Q;
+<span class="hljs-keyword">while</span> (Q--) {
+    <span class="hljs-keyword">int</span> L, R;
+
+    <span class="hljs-built_in">cin</span> &gt;&gt; L &gt;&gt; R;
+
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = L; i &lt;= R; i++) {
+        sum += a[i];
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="hljs-string">'\n'</span>;
+}
+</div></code></pre>
+<h3 id="c%C3%A1ch-l%C3%A0m-b%E1%BA%B1ng-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n"><strong>Cách làm bằng mảng cộng dồn:</strong></h3>
+<p>Ta sẽ tạo một mảng <strong>Sum[]</strong> với công thức truy hồi sau O(n):</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Lưu ý: Mảng a[] nhập từ idx 1</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+    Sum[i] = Sum[i - <span class="hljs-number">1</span>] + a[i];
+}
+<span class="hljs-keyword">int</span> Q;
+<span class="hljs-built_in">cin</span> &gt;&gt; Q;
+<span class="hljs-keyword">while</span> (Q--) {
+    <span class="hljs-keyword">int</span> L, R;
+    <span class="hljs-built_in">cin</span> &gt;&gt; L &gt;&gt; R;
+    <span class="hljs-built_in">cout</span> &lt;&lt; Sum[R] - Sum[L - <span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">'\n'</span>;
+}
+</div></code></pre>
+<ul>
+<li><strong>Sum[0] = 0</strong></li>
+<li><strong>Sum[i] = Sum[i-1] + a[i]</strong></li>
+</ul>
+<p><strong>Khi đó, ta nhận thấy với mảng</strong></p>
+<p><code>a1, a2, a3, a4, a5</code></p>
+<p><strong>Thì mảng Sum là:</strong></p>
+<ul>
+<li>
+<p>vị trí 1: a1</p>
+</li>
+<li>
+<p>vị trí 2: a1+ a2</p>
+</li>
+<li>
+<p>vị trí 3: a1+a2+a3</p>
+</li>
+<li>
+<p>vị trí 4: a1 + a2 + a3 + a4</p>
+</li>
+<li>
+<p>vị trí 5: a1 + a2 + a3 + a4 + a5</p>
+</li>
+</ul>
+<p>Như vậy, ví dụ ta cần lấy tổng từ 2 -&gt; 5, nó sẽ bằng</p>
+<table>
+<thead>
+<tr>
+<th>b[5] - b[1] = a1+a2+a3+a4+a5 - a1 = a2+a3+a4+a5</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h3 id="%C6%B0u--nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n"><strong>Ưu &amp; Nhược điểm của mảng cộng dồn:</strong></h3>
+<p><strong>Ưu:</strong> Nhanh hơn, mỗi truy vấn chỉ mất O(1)</p>
+<p><strong>Nhược:</strong> Tốn thêm bộ nhớ để lưu trữ mảng Sum[]</p>
+<h3 id="l%C6%B0u-%C3%BD-m%E1%BA%A3ng-%C4%91%C3%A1nh-d%E1%BA%A5u--c%E1%BB%99ng-d%E1%BB%93n"><strong><code>Lưu ý Mảng đánh dấu &amp; Cộng dồn:</code></strong></h3>
+<table>
+<thead>
+<tr>
+<th>1. Không sử dụng được với <strong>số âm</strong>, vì chỉ số trong mảng không thể là số âm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2. Chỉ áp dụng được cho mảng có  giá trị phần tử <strong><code>[0, 10^7]</code></strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="b%C3%A0i-t%E1%BA%ADp"><strong>BÀI TẬP</strong></h1>
+<h3 id="1-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n"><strong>1. Mảng cộng dồn:</strong></h3>
+<h4 id="b%C3%A0i-to%C3%A1n-1"><strong><code>Bài Toán 1</code> :</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Cho mảng A[] gồm N phần tử là số nguyên trong đoạn $[0, 10^6]$, hãy liệt kê các giá trị khác nhau trong mảng theo thứ tự từ nhỏ tới lớn.</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h4 id="b%C3%A0i-to%C3%A1n-2"><strong><code>Bài Toán 2</code> :</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Cho mảng A[] gồm N phần tử là số nguyên trong đoạn $[0, 10^6]$, hãy liệt kê các giá trị khác nhau trong mảng theo thứ tự xuất hiện trong mảng, mỗi giá trị chỉ liệt kê 1 lần</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h6 id="%C3%BD-t%C6%B0%E1%BB%9Fng-sau-khi-in-ra-gi%C3%A1-tr%E1%BB%8B-th%C3%AC-b%E1%BA%A1n-b%E1%BB%8F-%C4%91%C3%A1nh-d%E1%BA%A5u-gi%C3%A1-tr%E1%BB%8B-%C4%91%C3%B3-%C4%91%E1%BB%83-tr%C3%A1nh-in-tr%C3%B9ng">Ý tưởng: Sau khi in ra giá trị thì bạn bỏ đánh dấu giá trị đó để tránh in trùng.</h6>
+<h4 id="b%C3%A0i-to%C3%A1n-3"><strong><code>Bài Toán 3</code> :</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Liệt kê các phần tử xuất hiện ít nhất 2 lần trong mảng theo thứ tự xuất hiện trong mảng, mỗi phần tử chỉ liệt kê 1 lần</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h4 id="b%C3%A0i-to%C3%A1n-4"><strong><code>Bài Toán 4</code> :</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Cho mảng A[] và B[], hãy liệt kê các giá trị thuộc giao, hợp của hai mảng, mỗi giá trị liệt kê 1 lần theo thứ tự tăng dần. Dòng 1, 2 output lần lượt in giao, hợp của 2 mảng.</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h3 id="2-m%E1%BA%A3ng-c%E1%BB%99ng-d%E1%BB%93n-1-chi%E1%BB%81u"><strong>2. Mảng cộng dồn 1 chiều:</strong></h3>
+<h4 id="b%C3%A0i-to%C3%A1n"><strong><code>Bài Toán</code>:</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Cho mảng số nguyên <strong>A[]</strong> gồm <strong>N</strong> phần tử, hãy liệt kê các chỉ số i trong mảng thỏa mãn : Tổng các phần tử bên trái i và tổng các phần tử bên phải i là các số nguyên tố</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h6 id="g%E1%BB%A3i-%C3%BD--%C4%91%E1%BB%91i-v%E1%BB%9Bi-m%E1%BB%97i-ch%E1%BB%89-s%E1%BB%91-i-x%C3%A2y-d%E1%BB%B1ng-1-v%C3%B2ng-for-duy%E1%BB%87t-t%E1%BB%AB-0-t%E1%BB%9Bi-i---1-%C4%91%E1%BB%83-t%C3%ADnh-t%E1%BB%95ng-c%C3%A1c-s%E1%BB%91-b%C3%AAn-tr%C3%A1i-c%E1%BB%A7a-i-1-v%C3%B2ng-for-duy%E1%BB%87t-t%E1%BB%AB-i--1-t%E1%BB%9Bi-n---1-%C4%91%E1%BB%83-t%C3%ADnh-t%E1%BB%95ng-c%C3%A1c-ph%E1%BA%A7n-t%E1%BB%AD-n%E1%BA%B1m-b%C3%AAn-ph%E1%BA%A3i-c%E1%BB%A7a-i--ki%E1%BB%83m-tra-c%E1%BA%A3-2-t%E1%BB%95ng-l%C3%A0-s%E1%BB%91-nguy%C3%AAn-t%E1%BB%91-th%C3%AC-in-ra-ch%E1%BB%89-s%E1%BB%91-i-ch%C3%BA-%C3%BD-reset-bi%E1%BA%BFn-t%E1%BB%95ng-tr%C3%A1i-v%C3%A0-ph%E1%BA%A3i-t%E1%BA%A1i-m%E1%BB%97i-v%C3%B2ng-l%E1%BA%B7p-v%C3%A0-tr%C6%B0%E1%BB%9Dng-h%E1%BB%A3p-i--0-v%C3%A0-i--n---1">Gợi ý : Đối với mỗi chỉ số i xây dựng 1 vòng for duyệt từ 0 tới i - 1 để tính tổng các số bên trái của i, 1 vòng for duyệt từ i + 1 tới N - 1 để tính tổng các phần tử nằm bên phải của i =&gt; Kiểm tra cả 2 tổng là số nguyên tố thì in ra chỉ số i, chú ý reset biến tổng trái và phải tại mỗi vòng lặp. Và TRƯỜNG HỢP i = 0 và i = n - 1.</h6>
+
+</body>
+</html>

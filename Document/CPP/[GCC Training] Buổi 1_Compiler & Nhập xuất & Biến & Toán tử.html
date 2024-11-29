@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[GCC Training] Buổi 1_Compiler & Nhập xuất & Biến & Toán tử.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bu%E1%BB%95i-1-compiler-nh%E1%BA%ADp-xu%E1%BA%A5t-bi%E1%BA%BFn-to%C3%A1n-t%E1%BB%AD">Buổi 1: Compiler, Nhập xuất, Biến, Toán tử</h1>
+<h2 id="m%E1%BB%A5c-l%E1%BB%A5c">Mục lục</h2>
+<ul>
+<li><a href="#1-t%E1%BB%95ng-quan-v%E1%BB%81-c">1. Tổng quan về C++</a></li>
+<li><a href="#2-c%E1%BA%A5u-tr%C3%BAc-ch%C6%B0%C6%A1ng-tr%C3%ACnh-c">2. Cấu trúc chương trình C++</a></li>
+<li><a href="#3-bi%E1%BA%BFn-trong-c">3. Biến trong C++</a>
+<ul>
+<li><a href="#31-c%C3%A1c-ki%E1%BB%83u-d%E1%BB%AF-li%E1%BB%87u">3.1. Các kiểu dữ liệu</a></li>
+<li><a href="#32-bi%E1%BA%BFn-to%C3%A0n-c%E1%BB%A5c-v%C3%A0-c%E1%BB%A5c-b%E1%BB%99">3.2. Biến toàn cục và cục bộ</a></li>
+</ul>
+</li>
+<li><a href="#4-to%C3%A1n-t%E1%BB%AD-trong-c">4. Toán tử trong C++</a></li>
+<li><a href="#5-%C3%A9p-ki%E1%BB%83u">5. Ép kiểu</a></li>
+<li><a href="#6-b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">6. Bài tập luyện tập</a></li>
+</ul>
+<hr>
+<h2 id="n%E1%BB%99i-dung-bu%E1%BB%95i-h%E1%BB%8Dc">Nội dung buổi học</h2>
+<ul>
+<li>Hướng dẫn cài đặt IDE (Dev C++) và sửa các lỗi trong Dev C++.</li>
+<li>Hướng dẫn sử dụng Codeforces (submit bài, chọn trình biên dịch, ...).</li>
+<li>Giới thiệu về:
+<ul>
+<li>Nhập xuất trong C++.</li>
+<li>Biến và các kiểu dữ liệu.</li>
+<li>Các toán tử trong C++ (1 ngôi, 2 ngôi).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="y%C3%AAu-c%E1%BA%A7u-ki%E1%BA%BFn-th%E1%BB%A9c-c%E1%BA%A7n-chu%E1%BA%A9n-b%E1%BB%8B">Yêu cầu kiến thức cần chuẩn bị</h2>
+<ul>
+<li>Tạo tài khoản trên Codeforces và add nick của các bạn.</li>
+<li>Hiểu về các kiểu dữ liệu cơ bản trong C++.</li>
+<li>Nắm được cấu trúc của một chương trình C++.</li>
+</ul>
+<hr>
+<h2 id="b%C3%A0i-gi%E1%BA%A3ng-chi-ti%E1%BA%BFt">Bài giảng chi tiết</h2>
+<h3 id="1-t%E1%BB%95ng-quan-v%E1%BB%81-c">1. Tổng quan về C++</h3>
+<p>C++ là ngôn ngữ lập trình bậc trung, phát triển bởi <strong>Bjarne Stroustrup</strong> vào năm 1979. Đây là phần mở rộng của ngôn ngữ lập trình C, kết hợp các tính năng của ngôn ngữ cấp cao và cấp thấp.</p>
+<ul>
+<li><strong>Đặc điểm</strong>:
+<ul>
+<li>Đa nền tảng (Windows, macOS, Unix).</li>
+<li>Hỗ trợ lập trình tổng quát, hướng đối tượng, và thủ tục.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-c%E1%BA%A5u-tr%C3%BAc-ch%C6%B0%C6%A1ng-tr%C3%ACnh-c">2. Cấu trúc chương trình C++</h3>
+<p><strong>Ví dụ về chương trình C++:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// khai báo thư viện</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-comment">// hàm main</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Hello, world!"</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p><strong>Cấu trúc chính:</strong></p>
+<ul>
+<li><strong>Lệnh tiền xử lý</strong>: <code>#include &lt;iostream&gt;</code> và <code>using namespace std</code>.</li>
+<li><strong>Hàm main</strong>: Điểm bắt đầu của chương trình.</li>
+<li><strong>Câu lệnh và biểu thức</strong>: <code>cout</code> để in ra màn hình.</li>
+<li><strong>Chú thích</strong>: Sử dụng <code>//</code> hoặc <code>/* ... */</code>.</li>
+</ul>
+<p>Nói về tự khóa <code>const</code> :</p>
+<p>Được sử dụng để định nghĩa hằng số trong C++.</p>
+<p>Vd : <strong>const</strong> <strong>float</strong> PI = 3.14;</p>
+<p>Và bây giờ biến PI không thể thay đổi, nếu cố gắng thay đổi sẽ gặp lỗi.</p>
+<hr>
+<h3 id="3-bi%E1%BA%BFn-trong-c">3. Biến trong C++</h3>
+<h4 id="31-c%C3%A1c-ki%E1%BB%83u-d%E1%BB%AF-li%E1%BB%87u">3.1. Các kiểu dữ liệu</h4>
+<table>
+<thead>
+<tr>
+<th>Kiểu</th>
+<th>Kích thước</th>
+<th>Vùng giá trị</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td>1 byte</td>
+<td>-128 tới 127 hoặc 0 tới 255</td>
+</tr>
+<tr>
+<td><code>unsigned char</code></td>
+<td>1 byte</td>
+<td>0 tới 255</td>
+</tr>
+<tr>
+<td><code>signed char</code></td>
+<td>1 byte</td>
+<td>-128 tới 127</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>2 hoặc 4 bytes</td>
+<td>-32,768 tới 32,767 hoặc -2,147,483,648 tới 2,147,483,647</td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td>2 hoặc 4 bytes</td>
+<td>0 tới 65,535 hoặc 0 tới 4,294,967,295</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>2 bytes</td>
+<td>-32,768 tới 32,767</td>
+</tr>
+<tr>
+<td><code>unsigned short</code></td>
+<td>2 bytes</td>
+<td>0 tới 65,535</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>4 bytes</td>
+<td>-2,147,483,648 tới 2,147,483,647</td>
+</tr>
+<tr>
+<td><code>unsigned long</code></td>
+<td>4 bytes</td>
+<td>0 tới 4,294,967,295</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4 bytes</td>
+<td>Khoảng 6-7 chữ số thập phân</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8 bytes</td>
+<td>Khoảng 15-16 chữ số thập phân</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32-bi%E1%BA%BFn-to%C3%A0n-c%E1%BB%A5c-v%C3%A0-c%E1%BB%A5c-b%E1%BB%99">3.2. Biến toàn cục và cục bộ</h4>
+<table>
+<thead>
+<tr>
+<th>Đặc điểm</th>
+<th>Biến global</th>
+<th>Biến local</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vị trí khai báo</strong></td>
+<td>Ngoài <code>main</code></td>
+<td>Trong hàm hoặc khối lệnh</td>
+</tr>
+<tr>
+<td><strong>Phạm vi sử dụng</strong></td>
+<td>Toàn chương trình</td>
+<td>Chỉ trong hàm hoặc khối đó</td>
+</tr>
+</tbody>
+</table>
+<h3 id="to%C3%A1n-t%E1%BB%AD-nh%E1%BA%ADp-xu%E1%BA%A5t-trong-c">Toán tử nhập xuất trong C++</h3>
+<ul>
+<li>
+<p>Hàm  <code>cout &lt;&lt;</code> được sử dụng để in lệnh đã cho ra màn hình.</p>
+</li>
+<li>
+<p>Hàm <code>cin &gt;&gt;</code>  được dùng để đọc dữ liệu đầu vào từ bàn phím.</p>
+</li>
+<li>
+<p>Định dạng kiểu in (giới thiệu sơ qua, bảo các em về nhà tìm hiểu thêm)</p>
+</li>
+</ul>
+<p>Ví dụ để in ra giá trị số float, double với độ chính xác k chữ số sau dấu phẩy bạn thêm cụm <code>&lt;&lt; fixed &lt;&lt; setprecision(k)</code> trước tên biến.(cần khai báo thư viện <code>&quot;iomanip&quot;</code> )
+<code>setw()</code>,<code>setfill</code>,....</p>
+<hr>
+<h3 id="4-to%C3%A1n-t%E1%BB%AD-trong-c">4. Toán tử trong C++</h3>
+<h4 id="41-to%C3%A1n-t%E1%BB%AD-g%C3%A1n">4.1. Toán tử gán</h4>
+<table>
+<thead>
+<tr>
+<th>Toán tử</th>
+<th>Ví dụ</th>
+<th>Tương đương</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>=</code></td>
+<td><code>C = A</code></td>
+<td>Gán giá trị của A vào C</td>
+</tr>
+<tr>
+<td><code>+=</code></td>
+<td><code>C += A</code></td>
+<td><code>C = C + A</code></td>
+</tr>
+<tr>
+<td><code>-=</code></td>
+<td><code>C -= A</code></td>
+<td><code>C = C - A</code></td>
+</tr>
+<tr>
+<td><code>*=</code></td>
+<td><code>C *= A</code></td>
+<td><code>C = C * A</code></td>
+</tr>
+<tr>
+<td><code>/=</code></td>
+<td><code>C /= A</code></td>
+<td><code>C = C / A</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="42-to%C3%A1n-t%E1%BB%AD-s%E1%BB%91-h%E1%BB%8Dc">4.2. Toán tử số học</h4>
+<table>
+<thead>
+<tr>
+<th>Toán tử</th>
+<th>Miêu tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Cộng</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Trừ</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Chia (phần nguyên nếu là số nguyên) &amp; Không chia được cho 0</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Nhân</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Chia lấy dư</td>
+</tr>
+<tr>
+<td><code>++</code></td>
+<td>cộng 1 đơn vị : tương đương <code>A += 1</code></td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>cộng 1 đơn vị : tương đương <code>A -= 1</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Toán tử</th>
+<th>Ý nghĩa</th>
+<th>Thứ tự thực hiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a++</code></td>
+<td>Hậu tố: Tăng giá trị sau khi sử dụng</td>
+<td>Sử dụng giá trị ban đầu, sau đó tăng</td>
+</tr>
+<tr>
+<td><code>++a</code></td>
+<td>Tiền tố: Tăng giá trị trước khi sử dụng</td>
+<td>Tăng giá trị trước, sau đó sử dụng</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-%C3%A9p-ki%E1%BB%83u">5. Ép kiểu</h3>
+<p>Đôi khi chúng ta cần chuyển đổi giá trị một biểu thức sang kiểu dữ liệu khác. Ví dụ trong trường hợp ta muốn thực hiện phép toán chia lấy phần dư của 2 số nguyên, nhưng lại được lưu trong <strong>2 biến kiểu <code>float</code></strong>, ta không thể áp dụng trực tiếp toán tử <code>%</code> cho 2 biến đó. Bạn chạy chương trình thế này sẽ báo lỗi:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>, c;
+    <span class="hljs-keyword">float</span> b = <span class="hljs-number">6</span>;
+    c = a % b;
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; c;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Vì thế cần ép kiểu theo cú pháp:</p>
+<pre class="hljs"><code><div>&lt;kiểu dữ liệu&gt; &lt;biểu thức&gt;
+</div></code></pre>
+<p>để lấy giá trị từ biến <code>b</code>, đổi sang số nguyên để thực hiện phép <code>%</code>. Code đúng như sau:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>, c;
+    <span class="hljs-keyword">float</span> b = <span class="hljs-number">6</span>;
+    c = a % (<span class="hljs-keyword">int</span>)b;
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; c;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h3 id="6-b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">6. Bài tập luyện tập</h3>
+<ul>
+<li>
+<p>Nêu ví dụ về swap giá trị của hai biến</p>
+<ul>
+<li>
+<p>Có thể dùng biến thứ 3 tạm bằng toán tử gán</p>
+</li>
+<li>
+<p>Có thể dùng toán tử toán học để thay đổi giá trị. VD = a = a + b, b = a - b, a = a - b</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="b%C3%A0i-1-chu-vi-v%C3%A0-di%E1%BB%87n-t%C3%ADch-h%C3%ACnh-tr%C3%B2n">Bài 1: Chu vi và diện tích hình tròn</h4>
+<p>Nhập bán kính <code>r</code> (0 &lt; r &lt; (10^9)). Tính chu vi và diện tích:
+<strong>Example</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>18.85</td>
+</tr>
+<tr>
+<td></td>
+<td>28.27</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> r;
+    <span class="hljs-built_in">cin</span> &gt;&gt; r;
+    <span class="hljs-keyword">double</span> pi = <span class="hljs-number">3.14159</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="hljs-number">2</span>);
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Chu vi: "</span> &lt;&lt; <span class="hljs-number">2</span> * pi * r &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Dien tich: "</span> &lt;&lt; pi * r * r &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h4 id="b%C3%A0i-2-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-ng%C3%A0y-th%C3%A1ng-n%C4%83m">Bài 2: Định dạng ngày tháng năm</h4>
+<p>Nhập 3 số <code>d, m, y</code> (ngày, tháng, năm) và in dưới dạng <code>dd/mm/yyyy</code>.
+<strong>Example</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 12 2021</td>
+<td>05/12/2021</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> d, m, y;
+    <span class="hljs-built_in">cin</span> &gt;&gt; d &gt;&gt; m &gt;&gt; y;
+    <span class="hljs-built_in">cout</span> &lt;&lt; setw(<span class="hljs-number">2</span>) &lt;&lt; setfill(<span class="hljs-string">'0'</span>) &lt;&lt; d &lt;&lt; <span class="hljs-string">"/"</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; setw(<span class="hljs-number">2</span>) &lt;&lt; setfill(<span class="hljs-string">'0'</span>) &lt;&lt; m &lt;&lt; <span class="hljs-string">"/"</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; y &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h4 id="b%C3%A0i-3-t%C3%ADnh-t%E1%BB%95ng-trong-%C4%91o%E1%BA%A1n-l-r">Bài 3: Tính tổng trong đoạn <code>[l; r]</code></h4>
+<p>Nhập 2 số <code>l, r</code>. Tính tổng các số nguyên trong đoạn <code>[l; r]</code>.</p>
+<p><strong>Example</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 10</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

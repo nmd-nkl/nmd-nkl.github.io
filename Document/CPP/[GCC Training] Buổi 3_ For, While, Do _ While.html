@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[GCC Training] Buổi 3_ For, While, Do _ While.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bu%E1%BB%95i-3-for-while-do--while">BUỔI 3: FOR, WHILE, DO _ WHILE</h1>
+<h2 id="m%E1%BB%A5c-l%E1%BB%A5c">MỤC LỤC</h2>
+<ul>
+<li><a href="#1-v%C3%B2ng-l%E1%BA%B7p-l%C3%A0-g%C3%AC">1. Vòng lặp là gì?</a></li>
+<li><a href="#2-c%C3%A1c-lo%E1%BA%A1i-v%C3%B2ng-l%E1%BA%B7p-trong-c">2. Các loại vòng lặp trong C</a>
+<ul>
+<li><a href="#a-v%C3%B2ng-l%E1%BA%B7p-while">a) Vòng lặp While</a></li>
+<li><a href="#b-v%C3%B2ng-l%E1%BA%B7p-for">b) Vòng lặp For</a></li>
+<li><a href="#c-v%C3%B2ng-l%E1%BA%B7p-do-while">c) Vòng lặp Do-While</a></li>
+</ul>
+</li>
+<li><a href="#3-%C4%91i%E1%BB%81u-khi%E1%BB%83n-trong-c%C3%A1c-v%C3%B2ng-l%E1%BA%B7p-break-continue">3. Điều khiển trong các vòng lặp (<code>break</code>, <code>continue</code>)</a>
+<ul>
+<li><a href="#a-l%E1%BB%87nh-break">a) Lệnh Break</a></li>
+<li><a href="#b-l%E1%BB%87nh-continue">b) Lệnh Continue</a></li>
+</ul>
+</li>
+<li><a href="#4-luy%E1%BB%87n-t%E1%BA%ADp">4. Luyện tập</a></li>
+</ul>
+<hr>
+<h2 id="i-m%E1%BB%A5c-ti%C3%AAu-ki%E1%BA%BFn-th%E1%BB%A9c">I. MỤC TIÊU KIẾN THỨC</h2>
+<ul>
+<li>Nắm vững được 3 kiểu lặp (chú trọng về vòng for).</li>
+<li>Có thể vẽ được các hình cơ bản (Hình tam giác).</li>
+<li>Giới thiệu một chút về cách vẽ hình dùng thêm <code>if</code> để chương trình sạch đẹp hơn.</li>
+</ul>
+<h2 id="ii-y%C3%AAu-c%E1%BA%A7u-chu%E1%BA%A9n-b%E1%BB%8B">II. YÊU CẦU CHUẨN BỊ</h2>
+<ul>
+<li>Ôn tập lại kiến thức cũ về <code>break</code>, <code>continue</code>.</li>
+<li>Tìm hiểu trước kiến thức về vòng lặp: <code>for</code>, <code>while</code>, <code>do while</code>.</li>
+</ul>
+<h2 id="iii-chi-ti%E1%BA%BFt-b%C3%A0i-gi%E1%BA%A3ng">III. CHI TIẾT BÀI GIẢNG</h2>
+<h3 id="1-v%C3%B2ng-l%E1%BA%B7p-l%C3%A0-g%C3%AC">1. Vòng lặp là gì?</h3>
+<p><strong>Khái niệm</strong>:</p>
+<ul>
+<li>Một câu lệnh vòng lặp cho phép chúng ta thực hiện một câu lệnh hoặc một khối câu lệnh nhiều lần cho đến khi gặp điều kiện dừng của vòng lặp.</li>
+<li>Ví dụ:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// In ra "tôi yêu ptit" 10 lần</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Tôi yêu PTIT"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+}
+</div></code></pre>
+<hr>
+<h3 id="2-c%C3%A1c-lo%E1%BA%A1i-v%C3%B2ng-l%E1%BA%B7p-trong-c">2. Các loại vòng lặp trong C:</h3>
+<h4 id="a-v%C3%B2ng-l%E1%BA%B7p-while">a) Vòng lặp While</h4>
+<ul>
+<li><strong>Khái niệm</strong>: Vòng lặp <code>while</code> thường được sử dụng để lặp đi lặp lại một khối lệnh không biết trước số lần lặp.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">while</span> (điều_kiện) {
+    <span class="hljs-comment">// Các câu lệnh</span>
+}
+</div></code></pre>
+<ul>
+<li><strong>Bài tập</strong>:
+<ol>
+<li>In ra các số lẻ (&lt;10) dùng <code>while</code>.</li>
+<li>Viết chương trình lặp n lần nhập giá trị k nguyên dương và hiển thị giá trị đảo của số vừa lặp.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h4 id="b-v%C3%B2ng-l%E1%BA%B7p-for">b) Vòng lặp For</h4>
+<ul>
+<li><strong>Khái niệm</strong>: Vòng lặp <code>for</code> là một cấu trúc điều khiển lặp lại cho phép bạn viết một cách hiệu quả một vòng lặp mà cần phải thực hiện một số cụ thể.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (khở<span class="hljs-keyword">i_t</span>ạo; điều_kiện; cập_nhật) {
+    <span class="hljs-comment">// Các câu lệnh</span>
+}
+</div></code></pre>
+<ul>
+<li><strong>Bài tập</strong>:
+<ol>
+<li>In ra 3 lần &quot;Tôi yêu PTIT&quot;.</li>
+<li>Tính tổng từ 0 đến n.</li>
+</ol>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Tôi yêu PTIT"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+}
+</div></code></pre>
+<hr>
+<h4 id="c-v%C3%B2ng-l%E1%BA%B7p-do-while">c) Vòng lặp Do-While</h4>
+<ul>
+<li><strong>Khái niệm</strong>: Không giống như vòng lặp <code>for</code> và <code>while</code>, vòng lặp <code>do ... while</code> kiểm tra điều kiện ở cuối vòng lặp. Do đó, nó luôn được thực hiện ít nhất một lần.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">do</span> {
+    <span class="hljs-comment">// Các câu lệnh</span>
+} <span class="hljs-keyword">while</span> (điều_kiện);
+</div></code></pre>
+<ul>
+<li><strong>Bài tập</strong>: In ra 3 lần &quot;Tôi yêu PTIT lần i&quot; với <code>i</code> là số lần lặp.</li>
+</ul>
+<hr>
+<h3 id="3-%C4%91i%E1%BB%81u-khi%E1%BB%83n-trong-c%C3%A1c-v%C3%B2ng-l%E1%BA%B7p-break-continue">3. Điều khiển trong các vòng lặp (<code>break</code>, <code>continue</code>)</h3>
+<h4 id="a-l%E1%BB%87nh-break">a) Lệnh Break</h4>
+<ul>
+<li>Lệnh <code>break</code> sẽ làm vòng lặp lập tức kết thúc và không chạy khối lệnh phía sau.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">500</span>) {
+        <span class="hljs-keyword">break</span>;
+    }
+}
+</div></code></pre>
+<h4 id="b-l%E1%BB%87nh-continue">b) Lệnh Continue</h4>
+<ul>
+<li>Lệnh <code>continue</code> lập tức dừng khối lệnh đang chạy lại, cập nhật điều kiện chạy và tiếp tục vòng lặp với biến điều kiện tiếp theo.</li>
+</ul>
+<h3 id="v%C3%B2ng-l%E1%BA%B7p-v%C3%B4-h%E1%BA%A1n">Vòng lặp vô hạn</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Vòng lặp vô hạn với for</span>
+<span class="hljs-keyword">for</span> (; ;) {
+    <span class="hljs-comment">// code</span>
+}
+
+<span class="hljs-comment">// Vòng lặp vô hạn với while</span>
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-comment">// code</span>
+}
+
+<span class="hljs-comment">// Vòng lặp vô hạn với do-while</span>
+<span class="hljs-keyword">do</span> {
+    <span class="hljs-comment">// code</span>
+} <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>);
+</div></code></pre>
+<ul>
+<li>Trường hợp vận dụng: yêu cầu nhập dữ liệu đầu vào đến hết file.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> input;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">cin</span> &gt;&gt; input) { <span class="hljs-comment">// Đọc cho đến khi EOF</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; input &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h3 id="4-luy%E1%BB%87n-t%E1%BA%ADp">4. Luyện tập</h3>
+<ul>
+<li><strong>Bài tập 1</strong>: Nhập số nguyên dương <code>n</code>. Vẽ các hình dưới định dạng sau:</li>
+</ul>
+<p>Dưới đây là nội dung sửa lại đầy đủ, với các hình tam giác được đảm bảo cân đối theo yêu cầu:</p>
+<hr>
+<h3 id="b%C3%A0i-1-nh%E1%BA%ADp-s%E1%BB%91-nguy%C3%AAn-d%C6%B0%C6%A1ng-n-v%E1%BA%BD-c%C3%A1c-h%C3%ACnh-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-sau">Bài 1: Nhập số nguyên dương <code>n</code>. Vẽ các hình dưới định dạng sau:</h3>
+<h4 id="a">a)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****
+*****
+*****
+*****
+*****
+</div></code></pre>
+<h4 id="b">b)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+*   *     
+*   *      
+*   *     
+*****       
+</div></code></pre>
+<h4 id="c">c)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+** **     
+* * *      
+** **     
+***** 
+</div></code></pre>
+<h4 id="d">d)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+**  *     
+* * *      
+*  **     
+*****
+</div></code></pre>
+<h4 id="e">e)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+*  **     
+* * *      
+**  *     
+*****
+</div></code></pre>
+<h3 id="b%C3%A0i-2-nh%E1%BA%ADp-s%E1%BB%91-nguy%C3%AAn-d%C6%B0%C6%A1ng-n-v%E1%BA%BD-c%C3%A1c-h%C3%ACnh-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-sau">Bài 2: Nhập số nguyên dương <code>n</code>. Vẽ các hình dưới định dạng sau:</h3>
+<h4 id="a">a)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*
+**
+***
+****
+*****
+</div></code></pre>
+<h4 id="b">b)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+****     
+***      
+**       
+*        
+</div></code></pre>
+<h4 id="c">c)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*********
+ *******
+  *****
+   ***
+    *
+</div></code></pre>
+<h4 id="d">d)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>    *
+   ***
+  *****
+ *******
+*********
+</div></code></pre>
+<h3 id="b%C3%A0i-3-nh%E1%BA%ADp-s%E1%BB%91-nguy%C3%AAn-d%C6%B0%C6%A1ng-n-v%E1%BA%BD-c%C3%A1c-h%C3%ACnh-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-sau">Bài 3: Nhập số nguyên dương <code>n</code>. Vẽ các hình dưới định dạng sau:</h3>
+<h4 id="a">a)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*
+**
+* *
+*  *
+*****
+</div></code></pre>
+<h4 id="b">b)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*****    
+*  *     
+* *      
+**       
+*        
+</div></code></pre>
+<h4 id="c">c)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>*********
+ *     *
+  *   *
+   * *
+    *
+</div></code></pre>
+<h4 id="d">d)</h4>
+<p>n = 5</p>
+<pre class="hljs"><code><div>    *
+   * *
+  *   *
+ *     *
+*********
+</div></code></pre>
+<h3 id="b%C3%A0i-4-nh%E1%BA%ADp-s%E1%BB%91-nguy%C3%AAn-d%C6%B0%C6%A1ng-n-v%E1%BA%BD-c%C3%A1c-h%C3%ACnh-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-sau">Bài 4: Nhập số nguyên dương <code>n</code>. Vẽ các hình dưới định dạng sau:</h3>
+<p>n = 5</p>
+<pre class="hljs"><code><div>    * *    
+   ** **   
+  * * * *    
+ *  * *  *   
+***** *****
+</div></code></pre>
+<hr>
+<h2 id="b%C3%A0i-t%E1%BA%ADp">Bài tập</h2>
+<p>CB:</p>
+<ol>
+<li>Liệt kê các số  chẵn, lẻ, nguyên tố, chính phương bé hơn 1000 bằng for/ while (có thể in ngược)</li>
+<li>Tính tổng bằng for/while</li>
+</ol>
+<p>NC:</p>
+<ol>
+<li>Tìm các số Fibonacci bé hơn 100</li>
+<li>Vẽ bảng cửu chương</li>
+<li>Vẽ tam giác cân, đều, vẽ hình vuông, hình chữ nhật</li>
+</ol>
+
+</body>
+</html>
