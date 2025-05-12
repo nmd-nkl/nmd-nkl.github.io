@@ -1,5 +1,5 @@
 
-# Buổi 3: Sắp xếp và tìm kiếm, chia để trị
+# Sắp xếp và tìm kiếm, chia để trị
 
 ## Sắp xếp:
 
