@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bai3-DP.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng---dynamic-programming-dp">QUY HOẠCH ĐỘNG - DYNAMIC PROGRAMMING (DP)</h1>
+<h2 id="quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng-l%C3%A0-g%C3%AC">Quy hoạch động là gì?</h2>
+<p>Quy hoạch động là một phương pháp giải bài toán bằng cách chia bài toán đó thành các bài toán con nhỏ hơn.</p>
+<h2 id="nguy%C3%AAn-l%C3%BD-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-c%E1%BB%A7a-quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng">Nguyên lý hoạt động của quy hoạch động</h2>
+<ul>
+<li>Chia bài toán lớn thành các bài toán con nhỏ hơn.</li>
+<li>Lưu trữ kết quả của các bài toán con.</li>
+<li>Sử dụng lại các kết quả đã lưu.</li>
+</ul>
+<h2 id="c%C3%A1c-b%C6%B0%E1%BB%9Bc-th%E1%BB%B1c-hi%E1%BB%87n-quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng">Các bước thực hiện quy hoạch động</h2>
+<ol>
+<li><strong>Bước 1:</strong> Hiểu được cách mà bài toán lớn được chia thành các bài toán con và việc kết hợp các bài toán con để giải bài toán lớn.</li>
+<li><strong>Bước 2:</strong> Xác định được công thức truy hồi (Đây là bước quan trọng nhất).</li>
+<li><strong>Bước 3:</strong> Đi tính giá trị của các bài toán con lần lượt từ nhỏ đến lớn, đồng thời lưu lại kết quả tính được (thường dùng mảng hoặc ma trận).</li>
+<li><strong>Bước 4:</strong> Sử dụng các kết quả vừa tính được để giải bài toán lớn.</li>
+</ol>
+<h2 id="%C4%91i%E1%BB%81u-ki%E1%BB%87n-%C3%A1p-d%E1%BB%A5ng-quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng">Điều kiện áp dụng quy hoạch động</h2>
+<ul>
+<li>Bài toán lớn ban đầu có thể được chia thành các bài toán con nhỏ hơn.</li>
+<li>Phải có đủ không gian lưu trữ cho kết quả của các bài toán con.</li>
+<li>Việc tính toán giá trị của các bài toán con để giải bài toán lớn phải được thực hiện sau hữu hạn các bước.</li>
+</ul>
+<h2 id="%C6%B0u-v%C3%A0-nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng">Ưu và nhược điểm của quy hoạch động</h2>
+<h3 id="%C6%B0u-%C4%91i%E1%BB%83m">Ưu điểm:</h3>
+<ul>
+<li>Giảm thời gian tính toán và tránh các bước tính toán lặp lại không cần thiết.</li>
+<li>Giải quyết được các bài toán phức tạp mà các thuật toán khác khó và không thể thực hiện được.</li>
+</ul>
+<h3 id="nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m">Nhược điểm:</h3>
+<ul>
+<li>Tốn bộ nhớ và tốn thời gian trong việc lưu trữ và truy xuất kết quả từ bộ nhớ.</li>
+<li>Phức tạp trong việc triển khai, yêu cầu phải hiểu được rõ bài toán và tìm được công thức truy hồi chính xác.</li>
+</ul>
+<h2 id="c%C3%A1c-d%E1%BA%A1ng-to%C3%A1n-quy-ho%E1%BA%A1ch-%C4%91%E1%BB%99ng">Các dạng toán quy hoạch động</h2>
+<p>Có 2 dạng chính:</p>
+<ul>
+<li>Bài toán tối ưu (tìm giá trị nhỏ nhất hoặc lớn nhất).</li>
+<li>Bài toán tổ hợp (tìm số cách thực hiện của một việc nào đó).</li>
+</ul>
+<p>Các loại hình quy hoạch động mà chúng ta đã từng dùng trước đây đó là tính số Fibonacci thứ n và mảng cộng dồn. Chúng đều có các công thức truy hồi và bài toán cơ sở.</p>
+<ul>
+<li>Với việc tính số Fibonacci thứ n, thì công thức của nó là $f_n = f_{n-1} + f_{n-2}$ với $f_0 = 0, f_1 = 1$ và $n \ge 2$.</li>
+<li>Với mảng cộng dồn thì công thức là $sum[i] = sum[i - 1] + a[i]$ với $sum[0] = 0$ và $i \ge 1$.</li>
+</ul>
+<h2 id="m%E1%BB%99t-s%E1%BB%91-b%C3%A0i-t%E1%BA%ADp-%C4%91i%E1%BB%83n-h%C3%ACnh">Một số bài tập điển hình</h2>
+<h3 id="b%C3%A0i-to%C3%A1n-c%C3%A1i-t%C3%BAi">Bài toán cái túi</h3>
+<p><strong>Đề bài:</strong>
+Một người có cái túi thể tích V (V&lt;1000). Anh ta có N đồ vật cần mang theo (N≤1000), mỗi đồ vật có thể tích là A[i] (A[i]≤100) và giá trị là C[i] (C[i]≤100). Hãy xác định tổng giá trị lớn nhất của các đồ vật mà người đó có thể mang theo, sao cho tổng thể tích không vượt quá V.</p>
+<p><strong>Input:</strong>
+Dòng đầu ghi số bộ test T (T&lt;10)
+Mỗi bộ test gồm ba dòng.
+Dòng đầu ghi 2 số N và V. Dòng tiếp theo ghi N số của mảng A. Sau đó là một dòng ghi N số của mảng C.
+Dữ liệu vào luôn đảm bảo không có đồ vật nào có thể tích lớn hơn V.</p>
+<p><strong>Output:</strong>
+Với mỗi bộ test, ghi trên một dòng giá trị lớn nhất có thể đạt được.</p>
+<p><strong>Ví dụ:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Input</th>
+<th style="text-align:left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">15</td>
+</tr>
+<tr>
+<td style="text-align:left">15 10</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">5 2 1 3 5 2 5 8 9 6 3 1 4 7 8</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">1 2 3 5 1 2 5 8 7 4 1 2 3 2 1</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Giải:</strong> <a href="https://onlinegdb.com/XeCWWzKLP">Implementation Cái Túi</a></p>
+<p>(Tất cả đã được giải thích rõ ràng ở trong code)</p>
+<h3 id="b%C3%A0i-to%C3%A1n-x%C3%A2u-con-chung-d%C3%A0i-nh%E1%BA%A5t-longest-common-substring---lcs">Bài toán xâu con chung dài nhất (Longest Common Substring - LCS)</h3>
+<p><strong>Đề bài:</strong>
+Cho 2 xâu S1 và S2. Hãy tìm xâu con chung dài nhất của 2 xâu này (các phần tử không nhất thiết phải liên tiếp nhau).</p>
+<p><strong>Input:</strong> Dòng đầu tiên là số lượng bộ test T (T ≤ 20). Mỗi test gồm hai dòng, mô tả xâu S1 và S2, mỗi xâu có độ dài không quá 1000 và chỉ gồm các chữ cái in hoa.</p>
+<p><strong>Output:</strong> Với mỗi test, in ra độ dài dãy con chung dài nhất trên một dòng.</p>
+<p><strong>Ví dụ:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Input</th>
+<th style="text-align:left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">4</td>
+</tr>
+<tr>
+<td style="text-align:left">AGGTAB</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">GXTXAYB</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">AA</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">BB</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Giải:</strong> <a href="https://onlinegdb.com/LgND38d1a">Implementation LCS</a></p>
+<p>(Tất cả đã được giải thích rõ ràng ở trong code)</p>
+<h3 id="b%C3%A0i-to%C3%A1n-t%E1%BB%95-h%E1%BB%A3p---con-%E1%BA%BFch">Bài toán tổ hợp - Con ếch</h3>
+<p><strong>Đề bài:</strong>
+Một con ếch có thể nhảy 1, 2, 3 bước để có thể lên đến một đỉnh cần đến. Hãy đếm số các cách con ếch có thể nhảy đến đỉnh.</p>
+<p><strong>Input:</strong>
+Dòng đầu tiên đưa vào số lượng bộ test T.
+Những dòng kế tiếp đưa vào các bộ test.
+Mỗi bộ test là số n là số bước con ếch có thể lên được đỉnh.
+T, n thỏa mãn ràng buộc: 1≤T≤100; 1≤n ≤50.</p>
+<p><strong>Output:</strong>
+Đưa ra kết quả mỗi test theo từng dòng.</p>
+<p><strong>Ví dụ:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Input</th>
+<th style="text-align:left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">13</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Giải:</strong> <a href="https://onlinegdb.com/rx_6rXUJw">Implementation Con ếch</a></p>
+<p>(Tất cả đã được giải thích rõ ràng ở trong code)</p>
+
+</body>
+</html>

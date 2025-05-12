@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bai1-Sinh-QuayLui.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bu%E1%BB%95i-1">Buổi 1:</h1>
+<h3 id="m%E1%BB%A5c-l%E1%BB%A5c">Mục lục</h3>
+<ol>
+<li>
+<p><a href="#1-thu%E1%BA%ADt-to%C3%A1n-sinh">Thuật toán sinh</a></p>
+<p>1.1 <a href="#11-gi%E1%BB%9Bi-thi%E1%BB%87u">Giới thiệu</a></p>
+<p>1.2 <a href="#12-sinh-x%C3%A2u-nh%E1%BB%8B-ph%C3%A2n">Sinh xâu nhị phân</a></p>
+<p>1.3 <a href="#13-sinh-t%E1%BB%95-h%E1%BB%A3p-ch%E1%BA%ADp-k-c%E1%BB%A7a-n-ph%E1%BA%A7n-t%E1%BB%AD">Tổ hợp chập K của N</a></p>
+<p>1.4 <a href="#14-sinh-ho%C3%A1n-v%E1%BB%8B">Sinh Hoán vị</a></p>
+</li>
+<li>
+<p><a href="#2-%C4%91%E1%BB%87-quy-v%C3%A0-quay-lui">Đệ quy và Quay lui</a></p>
+<p>2.1 <a href="#21-%C4%91%E1%BB%87-quy">Đệ Quy</a></p>
+<p>2.2 <a href="#22-quay-lui">Quay lui</a></p>
+</li>
+<li>
+<p><a href="#3-b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">Bài tập luyện tập</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="1-thu%E1%BA%ADt-to%C3%A1n-sinh">1. Thuật toán sinh</h1>
+<h2 id="11-gi%E1%BB%9Bi-thi%E1%BB%87u"><strong>1.1 Giới thiệu</strong></h2>
+<ul>
+<li>
+<p><code>Thuật toán sinh</code> là một phương pháp vét cạn được dùng với các bài toán liệt kê hoặc đếm cấu hình, thỏa các yêu cầu sau:</p>
+<ul>
+<li>Có thể xác định được cấu hình đầu tiên và cấu hình cuối cùng.</li>
+<li>Tìm được thuật toán để từ cấu hình hiện tại sinh ra cấu hình kế tiếp.</li>
+</ul>
+</li>
+<li>
+<p><strong>Các bài toán phổ biến</strong>  sử dụng phương pháp sinh:</p>
+<ul>
+<li>Liệt kê xâu nhị phân</li>
+<li>Liệt kê tập con</li>
+<li>Liệt kê hoán vị</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>Giả mã:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>Bước 1 (Khởi tạo):
+    &lt;Thiết lập cấu hình đầu tiên&gt;;
+Bước 2 (Bước lặp):
+    while (&lt;Lặp khi cấu hình chưa phải cuối cùng&gt;)
+    {
+        &lt;Đưa ra cấu hình hiện tại&gt;;
+        &lt;Sinh ra cấu hình kế tiếp&gt;;
+    }
+    &lt;Đưa ra cấu hình cuối cùng&gt;;
+</div></code></pre>
+<h2 id="12-sinh-x%C3%A2u-nh%E1%BB%8B-ph%C3%A2n"><strong>1.2 Sinh xâu nhị phân</strong></h2>
+<h2 id="%F0%9F%A7%A0-ph%C3%A2n-t%C3%ADch-b%C3%A0i-to%C3%A1n">🧠 Phân tích bài toán</h2>
+<h3 id="%F0%9F%93%98%C4%91%E1%BB%81-b%C3%A0i-li%E1%BB%87t-k%C3%AA-x%C3%A2u-nh%E1%BB%8B-ph%C3%A2n-c%C3%B3-%C4%91%E1%BB%99-d%C3%A0i-n">📘<strong>Đề bài:</strong> Liệt kê xâu nhị phân có độ dài N</h3>
+<table>
+<thead>
+<tr>
+<th>OUTPUT (N=3)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>000</strong></td>
+<td>← Cấu hình đầu tiên: N bit 0</td>
+</tr>
+<tr>
+<td><strong>001</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>010</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>011</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>100</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>101</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>110</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>111</strong></td>
+<td>← Cấu hình cuối cùng: N bit 1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="c%C3%A1c-bi%E1%BA%BFn-to%C3%A0n-c%E1%BB%A5c-v%C3%A0-h%C3%A0m-kh%E1%BB%9Fi-t%E1%BA%A1o-c%E1%BA%A5u-h%C3%ACnh-%C4%91%E1%BA%A7u-ti%C3%AAn">Các biến toàn cục và hàm khởi tạo cấu hình đầu tiên</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> n, X[<span class="hljs-number">100</span>];          <span class="hljs-comment">// lưu cấu hình</span>
+<span class="hljs-keyword">bool</span> <span class="hljs-keyword">final</span> = <span class="hljs-literal">false</span>;     <span class="hljs-comment">// check cấu hình cuối</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){ <span class="hljs-comment">// Khởi tạo cấu hình đầu tiên</span>
+        X[i] = <span class="hljs-number">0</span>; <span class="hljs-comment">// n số 0</span>
+    }
+}
+</div></code></pre>
+<h2 id="h%C3%A0m-sinh-c%E1%BA%A5u-h%C3%ACnh-k%E1%BA%BF-ti%E1%BA%BFp">Hàm sinh cấu hình kế tiếp:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sinh</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> i = n; <span class="hljs-comment">// Xét từ phải sang</span>
+    <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">1</span> &amp;&amp; X[i] == <span class="hljs-number">1</span>){ <span class="hljs-comment">// Lặp cho đến khi gặp số 0 đầu tiên</span>
+        <span class="hljs-comment">// Tìm bit 0 đầu tiên từ phải sang trái. </span>
+        <span class="hljs-comment">// Tất cả các bit 1 đứng trước nó (bên phải nó) sẽ được đổi thành 0.</span>
+        X[i] = <span class="hljs-number">0</span>; 
+        --i;
+    }
+    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">0</span>){ <span class="hljs-comment">// cấu hình cuối cùng</span>
+        <span class="hljs-keyword">final</span> = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">else</span>{ 
+        <span class="hljs-comment">// Đổi bit 0 tìm được thành 1 để tạo cấu hình kế tiếp nhỏ nhất.</span>
+        X[i] = <span class="hljs-number">1</span>;
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%A7%A9-h%C3%A0m-main">🧩 Hàm main:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    n = <span class="hljs-number">3</span>;
+    init();
+    <span class="hljs-keyword">while</span>(!<span class="hljs-keyword">final</span>){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){
+            <span class="hljs-built_in">cout</span> &lt;&lt; X[i];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+        <span class="hljs-built_in">sinh</span>();
+    }
+}
+</div></code></pre>
+<h2 id="13-sinh-t%E1%BB%95-h%E1%BB%A3p-ch%E1%BA%ADp-k-c%E1%BB%A7a-n-ph%E1%BA%A7n-t%E1%BB%AD"><strong>1.3 Sinh tổ hợp chập K của N phần tử</strong></h2>
+<h2 id="%F0%9F%A7%A0-ph%C3%A2n-t%C3%ADch-b%C3%A0i-to%C3%A1n">🧠 Phân tích bài toán</h2>
+<h3 id="%F0%9F%93%98-%C4%91%E1%BB%81-b%C3%A0i">📘 Đề bài:</h3>
+<p>Cho các số tự nhiên từ 1 đến N, nhiệm vụ của bạn là liệt kê các tập con có K phần tử của tập N phần tử này theo thứ tự từ điển tăng dần.</p>
+<table>
+<thead>
+<tr>
+<th>OUTPUT (N=5, K=3)</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cấu hình đầu tiên: 123...K</strong> →</td>
+<td><strong>123</strong></td>
+<td><strong>145</strong></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>124</strong></td>
+<td><strong>234</strong></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>125</strong></td>
+<td><strong>235</strong></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>134</strong></td>
+<td><strong>245</strong></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>135</strong></td>
+<td><strong>345</strong></td>
+<td>→ <strong>Cấu hình cuối cùng: N-K+1, N-K+2,...N</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="%F0%9F%A7%AE-c%C3%A1c-bi%E1%BA%BFn-to%C3%A0n-c%E1%BB%A5c-v%C3%A0-h%C3%A0m-kh%E1%BB%9Fi-t%E1%BA%A1o-c%E1%BA%A5u-h%C3%ACnh-%C4%91%E1%BA%A7u-ti%C3%AAn">🧮 Các biến toàn cục và hàm khởi tạo cấu hình đầu tiên</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> n, k, X[<span class="hljs-number">100</span>];          <span class="hljs-comment">// lưu cấu hình</span>
+<span class="hljs-keyword">bool</span> <span class="hljs-keyword">final</span> = <span class="hljs-literal">false</span>;     <span class="hljs-comment">// check cấu hình cuối</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i++){
+        X[i] = i; <span class="hljs-comment">// cấu hình đầu tiên</span>
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%9B%A0%EF%B8%8F-h%C3%A0m-sinh-c%E1%BA%A5u-h%C3%ACnh-k%E1%BA%BF-ti%E1%BA%BFp">🛠️ Hàm sinh cấu hình kế tiếp:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sinh</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> i = k;
+    <span class="hljs-comment">// Tìm phần tử X[i] đầu tiên từ phải sang trái chưa đạt giá trị lớn nhất có thể.</span>
+    <span class="hljs-comment">// Giá trị lớn nhất mà X[i] có thể nhận là n - k + i </span>
+    <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">1</span> &amp;&amp; X[i] == n - k + i){
+        --i; 
+    }
+    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">0</span>){ <span class="hljs-comment">// cấu hình cuối</span>
+        <span class="hljs-keyword">final</span> = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">else</span>{ 
+        <span class="hljs-comment">// Tăng giá trị của X[i] lên 1.</span>
+        X[i]++; 
+        <span class="hljs-comment">// Đặt các phần tử từ X[i+1] trở đi bằng giá trị nhỏ nhất có thể (bằng  phần tử đứng trước + 1).</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt;= k; j++){
+            X[j] = X[j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>; 
+        }
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%A7%A9-h%C3%A0m-main">🧩 Hàm main:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    n = <span class="hljs-number">5</span>, k = <span class="hljs-number">3</span>;
+    init();
+    <span class="hljs-keyword">while</span>(!<span class="hljs-keyword">final</span>){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i++){
+            <span class="hljs-built_in">cout</span> &lt;&lt; X[i];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+        <span class="hljs-built_in">sinh</span>();
+    }
+}
+</div></code></pre>
+<h2 id="14-sinh-ho%C3%A1n-v%E1%BB%8B"><strong>1.4 Sinh hoán vị</strong></h2>
+<h2 id="%F0%9F%A7%A0-ph%C3%A2n-t%C3%ADch-b%C3%A0i-to%C3%A1n">🧠 Phân tích bài toán</h2>
+<h3 id="%C4%91%E1%BB%81-b%C3%A0i-sinh-ra-c%C3%A1c-ho%C3%A1n-v%E1%BB%8B-c%E1%BB%A7a-c%C3%A1c-s%E1%BB%91-t%E1%BB%B1-nhi%C3%AAn-t%E1%BB%AB-1-%C4%91%E1%BA%BFn-n"><strong>Đề bài:</strong> Sinh ra các hoán vị của các số tự nhiên từ 1 đến N</h3>
+<table>
+<thead>
+<tr>
+<th>OUTPUT (N=3)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>123</strong></td>
+<td>← Cấu hình đầu tiên: 123...N</td>
+</tr>
+<tr>
+<td><strong>132</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>213</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>231</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>312</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>321</strong></td>
+<td>← Cấu hình cuối cùng: N,N-1,N-2…1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%F0%9F%A7%AE-c%C3%A1c-bi%E1%BA%BFn-to%C3%A0n-c%E1%BB%A5c-v%C3%A0-h%C3%A0m-kh%E1%BB%9Fi-t%E1%BA%A1o-c%E1%BA%A5u-h%C3%ACnh-%C4%91%E1%BA%A7u-ti%C3%AAn">🧮 Các biến toàn cục và hàm khởi tạo cấu hình đầu tiên</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> n, X[<span class="hljs-number">100</span>];          <span class="hljs-comment">// lưu cấu hình</span>
+<span class="hljs-keyword">bool</span> <span class="hljs-keyword">final</span> = <span class="hljs-literal">false</span>;     <span class="hljs-comment">// check cấu hình cuối</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){
+        X[i] = i;
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%9B%A0%EF%B8%8F-h%C3%A0m-sinh-c%E1%BA%A5u-h%C3%ACnh-k%E1%BA%BF-ti%E1%BA%BFp">🛠️ Hàm sinh cấu hình kế tiếp:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sinh</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-comment">// Bước 1: Tìm i lớn nhất sao cho X[i] &lt; X[i+1] (tính từ n-1 về 1)</span>
+    <span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; 
+    <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">1</span> &amp;&amp; X[i] &gt; X[i + <span class="hljs-number">1</span>]){
+        --i;
+    }
+
+    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">0</span>){
+        <span class="hljs-comment">// Nếu không tìm thấy i (i về 0), tức là dãy đã sắp xếp giảm dần -&gt; cấu hình cuối cùng.</span>
+        <span class="hljs-keyword">final</span> = <span class="hljs-literal">true</span>; 
+    }
+    <span class="hljs-keyword">else</span>{
+        <span class="hljs-comment">// Bước 2: Tìm j lớn nhất từ n về i+1 sao cho X[j] &gt; X[i]</span>
+        <span class="hljs-keyword">int</span> j = n;
+        <span class="hljs-keyword">while</span>(X[i] &gt; X[j]) { <span class="hljs-comment">// Hoặc while(X[j] &lt; X[i])</span>
+             --j;
+        }
+
+        <span class="hljs-comment">// Bước 3: Đổi chỗ X[i] và X[j]</span>
+        swap(X[i], X[j]);
+
+        <span class="hljs-comment">// Bước 4: Đảo ngược đoạn từ X[i+1] đến X[n] để được cấu hình nhỏ nhất tiếp theo</span>
+        <span class="hljs-comment">// Có thể dùng reverse(X + i + 1, X + n + 1); hoặc vòng lặp</span>
+        <span class="hljs-keyword">int</span> left = i + <span class="hljs-number">1</span>, right = n;
+        <span class="hljs-keyword">while</span>(left &lt; right){
+            swap(X[left], X[right]);
+            left++; right--;
+        }
+        <span class="hljs-comment">// Hoặc #include &lt;algorithm&gt; rồi dùng:</span>
+        <span class="hljs-comment">// reverse(X + i + 1, X + n + 1); </span>
+    }
+}
+</div></code></pre>
+<h2 id="%F0%9F%A7%A9-h%C3%A0m-main">🧩 Hàm main:</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    n = <span class="hljs-number">3</span>;
+    init();
+    <span class="hljs-keyword">while</span>(!<span class="hljs-keyword">final</span>){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){
+            <span class="hljs-built_in">cout</span> &lt;&lt; X[i];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+        <span class="hljs-built_in">sinh</span>();
+    }
+}
+</div></code></pre>
+<blockquote>
+<p><strong>Mở Rộng:</strong> Trong C++ cũng cung cấp 2 hàm <strong>next_permutation</strong> để
+sinh ra cấu hình kế tiếp và <strong>prev_permutation</strong> để sinh ra cấu hình liền trước. Các bạn có thể sử dụng nó và kết hợp với mảng hoặc vector để sinh hoán vị.</p>
+</blockquote>
+<h3 id="%F0%9F%93%8C-h%C3%A0m-nextpermutation">📌 Hàm <code>next_permutation</code></h3>
+<p><strong>Hàm <code>next_permutation</code></strong> áp dụng với mảng, đối với <code>vector</code> và <code>string</code> các bạn thay bằng iterator <code>begin()</code> và <code>end()</code>.</p>
+<hr>
+<div align="center">
+<h3 id="%F0%9F%94%B7-v%C3%AD-d%E1%BB%A5">🔷 Ví dụ:</h3>
+</div>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> a[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>};
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++){
+            <span class="hljs-built_in">cout</span> &lt;&lt; a[i];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    } <span class="hljs-keyword">while</span>(next_permutation(a, a + <span class="hljs-number">4</span>));
+}
+</div></code></pre>
+<p>✅ Gợi ý:</p>
+<ul>
+<li><code>next_permutation(begin, end)</code> sẽ hoán vị mảng (hoặc vector/string) sang cấu hình kế tiếp theo thứ tự từ điển.</li>
+<li>Khi không còn hoán vị tiếp theo, nó trả về <code>false</code>.</li>
+</ul>
+<h3 id="%F0%9F%93%8C-h%C3%A0m-prevpermutation">📌 Hàm <code>prev_permutation</code></h3>
+<p><strong>Hàm <code>prev_permutation</code></strong> để sinh hoán vị theo thứ tự ngược.</p>
+<hr>
+<div align="center">
+<h3 id="%F0%9F%94%B7-v%C3%AD-d%E1%BB%A5">🔷 Ví dụ:</h3>
+</div>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> a[] = {<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>};
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++){
+            <span class="hljs-built_in">cout</span> &lt;&lt; a[i];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    } <span class="hljs-keyword">while</span>(prev_permutation(a, a + <span class="hljs-number">4</span>));
+}
+</div></code></pre>
+<h1 id="2-%C4%91%E1%BB%87-quy-v%C3%A0-quay-lui">2. Đệ quy và Quay lui</h1>
+<h2 id="21-%C4%91%E1%BB%87-quy"><strong>2.1 Đệ quy</strong></h2>
+<h3 id="%C4%91%E1%BB%8Bnh-ngh%C4%A9a-h%C3%A0m-%C4%91%E1%BB%87-quy">Định Nghĩa Hàm Đệ Quy</h3>
+<ul>
+<li><strong>Hàm đệ quy</strong> là hàm tự gọi lại chính nó để giải bài toán bằng cách chia nhỏ thành các bài toán con giống hệt, cho đến khi gặp điều kiện dừng (base case).được định nghĩa là hàm gọi lại chính nó.</li>
+<li>Điều kiện:</li>
+</ul>
+<ul>
+<li>Điều kiện dừng (base case)</li>
+<li>công thức truy hồi</li>
+</ul>
+<ul>
+<li><strong>Cú Pháp</strong>:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">recursive</span><span class="hljs-params">()</span></span>{
+    ......
+    recursive();
+    ......
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    ......
+    recursive();
+    ......
+}
+</div></code></pre>
+<h3 id="v%C3%AD-d%E1%BB%A5">Ví dụ:</h3>
+<p>Tính tổng tự nhiên từ 1 tới N bằng đệ quy</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
+   <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>){
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+   }
+   <span class="hljs-keyword">else</span>{
+      <span class="hljs-keyword">return</span> n + sum(n - <span class="hljs-number">1</span>);
+   }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+   <span class="hljs-built_in">cout</span>&lt;&lt;sum(<span class="hljs-number">3</span>);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Giải thích:
+<img src="https://cdn-blog.28tech.com.vn/media/c tutorial/de_quy/de_quy_2.png" alt="alt"></p>
+<h3 id="v%C3%AD-d%E1%BB%A5-2-t%C3%ADnh-giai-th%E1%BB%ABa-n">Ví dụ 2: Tính giai thừa N!</h3>
+<p>Công thức: N! = N * (N-1)! với điều kiện dừng 0! = 1.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> <span class="hljs-title">giaiThua</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-comment">// Điều kiện dừng (base case)</span>
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    } 
+    <span class="hljs-comment">// Công thức truy hồi</span>
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> n * giaiThua(n - <span class="hljs-number">1</span>);
+    }
+}
+</div></code></pre>
+<p>Lưu ý: Gọi đệ quy quá sâu (ví dụ: tính tổng 1 tỷ số) có thể dẫn đến lỗi tràn bộ nhớ stack (Stack Overflow) do mỗi lần gọi hàm đệ quy sẽ tạo một khung nhớ mới trên stack.</p>
+<h2 id="22-quay-lui"><strong>2.2 Quay Lui</strong></h2>
+<h3 id="kh%C3%A1i-ni%E1%BB%87m">Khái niệm</h3>
+<p><strong>Thuật toán quay lui (backtracking)</strong> là một kĩ thuật thiết kế giải thuật dựa trên đệ quy. Ý tưởng của quay lui là tìm lời giải từng bước, mỗi bước chọn một trong số các lựa chọn khả dĩ và đệ quy.</p>
+<h3 id="t%C6%B0-t%C6%B0%E1%BB%9Fng">Tư tưởng</h3>
+<ul>
+<li>
+<p>Dùng để giải bài toán liệt kê các cấu hình. Mỗi cấu hình được xây dựng bằng từng phần tử. Mỗi phần tử lại được chọn bằng cách thử tất cả các khả năng.</p>
+</li>
+<li>
+<p>Các bước trong việc liệt kê cấu hình dạng X[1...n]:</p>
+<ul>
+<li>Xét tất cả các giá trị X[1] có thể nhận, thử X[1] nhận các giá trị đó. Với mỗi giá trị của X[1] ta sẽ:</li>
+<li>Xét tất cả giá trị X[2] có thể nhận, lại thử X[2] cho các giá trị đó. Với mỗi giá trị X[2] lại xét khả năng giá trị của X[3]...tiếp tục như vậy cho tới bước:</li>
+<li>...</li>
+<li>....</li>
+<li>Xét tất cả giá trị X[n] có thể nhận, thử cho X[n] nhận lần lượt giá trị đó.</li>
+<li>Thông báo cấu hình tìm được.</li>
+</ul>
+</li>
+</ul>
+<h3 id="m%C3%B4-h%C3%ACnh-thu%E1%BA%ADt-to%C3%A1n">Mô hình thuật toán</h3>
+<pre class="hljs"><code><div>Backtracking(k) {
+	<span class="hljs-keyword">for</span>([Mỗi phương án chọn i(thuộc tập D)]) {
+		<span class="hljs-keyword">if</span> ([Chấp nhận i]) {
+			[Chọn i cho X[k]];
+			<span class="hljs-keyword">if</span> ([Thành công]) {
+				[Đưa ra kết quả];
+			} <span class="hljs-keyword">else</span> {
+				Backtracking(k+<span class="hljs-number">1</span>);
+				[Bỏ chọn i cho X[k]];
+			}
+		}
+	}
+}
+</div></code></pre>
+<blockquote>
+<p>Việc thêm giá trị mới vào tập đang xét rồi cuối cùng xoá bỏ nó ra khỏi tập giải thích cho tên gọi &quot;quay lui&quot; của thuật toán. Đó là việc khôi phục lại trạng thái cũ của tập hợp sau khi kết thúc việc gọi đệ quy.</p>
+</blockquote>
+<h3 id="v%C3%AD-d%E1%BB%A5">Ví dụ:</h3>
+<p><strong>Bài toán:</strong> Liệt kê tất cả các dãy nhị phân độ dài n, là dãy có tất cả n ký tự và gồm toàn các ký 0 tự 1 và .
+Ví dụ, với ta có các dãy với n = 3, 000, 001, 010, 011, 100, 101, 110, 111.</p>
+<p>Phân tích:
+Ở ví dụ phía trên, chúng ta đã nói về việc xét mọi trường hợp để xây dựng các dãy này như thế nào. Khi cài đặt đệ quy, sử dụng tư duy quy nạp &quot;xây tập sau từ tập trước&quot;, thuật toán sẽ hoạt động như sau:</p>
+<p><img src="image.png" alt="alt text"></p>
+<p><strong>CODE:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">100001</span>]={};
+<span class="hljs-keyword">int</span> n;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">in</span><span class="hljs-params">()</span></span>{
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++){
+		<span class="hljs-built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="hljs-string">" "</span>;
+	}
+	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Gen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>{
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">1</span>; j++){
+        a[i] = j;
+        <span class="hljs-keyword">if</span>(i == n) {
+            in();
+        }
+        <span class="hljs-keyword">else</span>{
+            Gen(i+<span class="hljs-number">1</span>);
+        }
+		
+	}
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+
+	<span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+	Gen(<span class="hljs-number">1</span>);
+
+}
+
+</div></code></pre>
+<h2 id="k%C4%A9-thu%E1%BA%ADt-nh%C3%A1nh-c%E1%BA%ADn"><strong>[*] Kĩ thuật nhánh cận</strong></h2>
+<h3 id="1-%F0%9F%8C%9F-%C3%BD-t%C6%B0%E1%BB%9Fng-t%E1%BB%95ng-qu%C3%A1t">1. 🌟 Ý tưởng tổng quát</h3>
+<p><strong>Nhánh cận (Branch and Bound)</strong> là kỹ thuật giải các bài toán tối ưu hóa khó (NP-hard) bằng cách:</p>
+<ul>
+<li>
+<p>Phân nhánh bài toán thành các bài toán con nhỏ hơn.</p>
+</li>
+<li>
+<p>Tính cận trên / cận dưới cho mỗi nhánh (ước lượng tốt nhất có thể đạt).</p>
+</li>
+<li>
+<p>Cắt bỏ (Bound) các nhánh không thể dẫn tới lời giải tốt hơn lời giải tốt nhất hiện tại.</p>
+</li>
+<li>
+<p>Chìa khóa: Không xét hết mọi trường hợp như vét cạn, mà chỉ xét những nhánh có tiềm năng!</p>
+</li>
+</ul>
+<h3 id="2-%F0%9F%8C%9F-quy-tr%C3%ACnh-c%C6%A1-b%E1%BA%A3n">2. 🌟 Quy trình cơ bản</h3>
+<p><strong>Bước 1:</strong> Xác định bài toán tối ưu</p>
+<ul>
+<li>Cần tối ưu (tối thiểu hóa hoặc tối đa hóa) một hàm mục tiêu.</li>
+</ul>
+<p><strong>Bước 2:</strong> Phân nhánh (Branching)</p>
+<ul>
+<li>
+<p>Từ trạng thái hiện tại, tạo các trạng thái con bằng cách:</p>
+<ul>
+<li>
+<p>Quyết định chọn / không chọn một đối tượng.</p>
+</li>
+<li>
+<p>Quyết định gán / không gán một giá trị.</p>
+</li>
+<li>
+<p>Đi tiếp đến một đỉnh mới.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Bước 3:</strong> Tính cận (Bounding)</p>
+<ul>
+<li>
+<p>Với mỗi nhánh con, ước lượng:</p>
+<ul>
+<li>
+<p>Cận trên (nếu là tối đa hóa).</p>
+</li>
+<li>
+<p>Cận dưới (nếu là tối thiểu hóa).</p>
+</li>
+<li>
+<p>Cận phải lạc quan, tức là giả định trường hợp thuận lợi nhất.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Bước 4:</strong> Cắt nhánh (Pruning)</p>
+<ul>
+<li>Nếu cận của một nhánh kém hơn lời giải tốt nhất hiện tại ➔ loại bỏ nhánh (không mở rộng tiếp).</li>
+</ul>
+<p><strong>Bước 5:</strong> Cập nhật lời giải tốt nhất</p>
+<ul>
+<li>Khi gặp lời giải hoàn chỉnh (chấp nhận được) tốt hơn lời giải hiện tại ➔ cập nhật.</li>
+</ul>
+<p><strong>Bước 6:</strong> Lặp lại đến khi:</p>
+<ul>
+<li>Không còn nhánh nào mở rộng được nữa.</li>
+</ul>
+<h3 id="gi%E1%BA%A3-m%C3%A3">Giả mã</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">branch_and_bound</span><span class="hljs-params">(i)</span>
+</span>{
+    <span class="hljs-comment">// Đánh giá các nghiệm mở rộng</span>
+    <span class="hljs-keyword">if</span> ({Các_nghiệm_mở_rộng_đều_khô<span class="hljs-keyword">ng_t</span>ốt_hơn_best_solution})
+        <span class="hljs-keyword">return</span>;
+	
+    <span class="hljs-keyword">for</span> (value in S[i])
+    {
+        x[i] = value; <span class="hljs-comment">// Ghi nhận thành phần thứ i.</span>
+		
+        <span class="hljs-keyword">if</span> ({Tìm_thấy_nghiệm})
+            best_solution = X; <span class="hljs-comment">// Cập nhật lại best_solution bằng nghiệm vừa tìm được.</span>
+        <span class="hljs-keyword">else</span> 
+            branch_and_bound(i + <span class="hljs-number">1</span>); <span class="hljs-comment">// Chưa tìm thấy nghiệm thì xây dựng tiếp.</span>
+		
+        {Loại_bỏ_thành_phần_thứ_i}
+    }
+}
+
+</div></code></pre>
+<h1 id="3-b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">3. Bài tập luyện tập</h1>
+<h2 id="b%C3%A0i-1-sinh-x%C3%A2u-nhi-ph%C3%A2n-th%E1%BB%8Fa-m%C3%A3n-%C4%91i%E1%BB%81u-ki%E1%BB%87n">Bài 1: Sinh xâu nhi phân thỏa mãn điều kiện</h2>
+<p>Hãy liệt kê tất cả các xâu nhị phân có độ dài 𝑛 sao cho
+mỗi xâu nhị phân có duy nhất một dãy 𝑘 bít 1 liên tiếp.</p>
+<p><strong>Input</strong></p>
+<pre class="hljs"><code><div>n = 5
+k = 3
+</div></code></pre>
+<p><strong>Output</strong></p>
+<pre class="hljs"><code><div>0 0 1 1 1
+0 1 1 1 0
+1 0 1 1 1
+1 1 1 0 0
+1 1 1 0 1
+</div></code></pre>
+<p><strong>Giải</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">100001</span>]={};
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inCustom</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span> </span>{
+    <span class="hljs-keyword">int</span> count_streak = <span class="hljs-number">0</span>; <span class="hljs-comment">// Đếm số lượng dãy k bit 1 liên tiếp</span>
+    <span class="hljs-keyword">int</span> current_streak = <span class="hljs-number">0</span>; <span class="hljs-comment">// Độ dài dãy 1 liên tiếp hiện tại</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n + <span class="hljs-number">1</span>; i++) { <span class="hljs-comment">// Duyệt thêm 1 phần tử để xử lý dãy 1 ở cuối</span>
+        <span class="hljs-keyword">if</span> (i &lt;= n &amp;&amp; a[i] == <span class="hljs-number">1</span>) {
+            current_streak++;
+        } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// Gặp số 0 hoặc kết thúc xâu</span>
+            <span class="hljs-keyword">if</span> (current_streak == k) {
+                count_streak++;
+            }
+            current_streak = <span class="hljs-number">0</span>; <span class="hljs-comment">// Reset streak</span>
+        }
+    }
+
+    <span class="hljs-comment">// Nếu chỉ có đúng 1 dãy k bit 1 liên tiếp</span>
+    <span class="hljs-keyword">if</span> (count_streak == <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="hljs-string">" "</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+}
+
+<span class="hljs-keyword">bool</span> <span class="hljs-keyword">final</span> = <span class="hljs-literal">false</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sinh</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
+    <span class="hljs-keyword">int</span> i = n; 
+    <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">1</span> &amp;&amp; a[i] == <span class="hljs-number">1</span>){
+        a[i] = <span class="hljs-number">0</span>; 
+        --i;
+    }
+    <span class="hljs-keyword">if</span>(i == <span class="hljs-number">0</span>){ 
+        <span class="hljs-keyword">final</span> = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">else</span>{ 
+        a[i] = <span class="hljs-number">1</span>;
+    }
+}
+
+<span class="hljs-comment">// Hàm chính để chạy</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lietKeXauNhiPhan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span></span>{
+    <span class="hljs-comment">// Khởi tạo cấu hình đầu tiên (toàn số 0)</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) a[i] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">final</span> = <span class="hljs-literal">false</span>; 
+
+    <span class="hljs-keyword">while</span>(!<span class="hljs-keyword">final</span>){
+        inCustom(n, k); <span class="hljs-comment">// Kiểm tra và in cấu hình hiện tại</span>
+        <span class="hljs-built_in">sinh</span>(n);        <span class="hljs-comment">// Sinh cấu hình kế tiếp</span>
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    ios_base::sync_with_stdio(<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>); <span class="hljs-built_in">cout</span>.tie(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">int</span> n, k; <span class="hljs-comment">// Sửa s thành k</span>
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; k; <span class="hljs-comment">// Đọc n và k</span>
+    lietKeXauNhiPhan(n, k); <span class="hljs-comment">// Gọi hàm xử lý chính</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</div></code></pre>
+<h2 id="b%C3%A0i-2-li%E1%BB%87t-k%C3%AA-t%E1%BA%ADp-h%E1%BB%A3p">Bài 2: liệt kê tập hợp</h2>
+<p>Liệt kê tất cả các tập hợp khác rỗng chứa các số từ 1 đến n, theo thứ tự từ điển.</p>
+<p>Input</p>
+<pre class="hljs"><code><div>3
+</div></code></pre>
+<p>Output</p>
+<pre class="hljs"><code><div>1
+1 2
+1 2 3
+1 3
+2
+2 3
+3
+</div></code></pre>
+<p>Code:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; res;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; a;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>{
+  <span class="hljs-keyword">if</span>(i &gt; n){
+    <span class="hljs-keyword">if</span> (!a.empty()) { 
+        res.push_back(a);
+    }
+    <span class="hljs-keyword">return</span>;
+  }
+
+  backtrack(i + <span class="hljs-number">1</span>);
+
+  a.push_back(i);
+  backtrack(i + <span class="hljs-number">1</span>);
+  a.pop_back();
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    backtrack(<span class="hljs-number">1</span>);
+    sort(res.begin(), res.end());
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i: res){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> j: i){
+            <span class="hljs-built_in">cout</span> &lt;&lt; j &lt;&lt; <span class="hljs-string">" "</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+}
+</div></code></pre>
+<h2 id="b%C3%A0i-3-ph%C3%A2n-t%C3%ADch-s%E1%BB%91-th%C3%A0nh-t%E1%BB%95ng-c%C3%A1c-s%E1%BB%91">Bài 3: phân tích số thành tổng các số</h2>
+<p>Cho số nguyên dương n (n≤50). Liệt kê tất cả các cách phân tích n thành tổng các số nguyên nhỏ hơn n, theo thứ tự từ điển.</p>
+<p>Input</p>
+<pre class="hljs"><code><div>5
+</div></code></pre>
+<p>Output</p>
+<pre class="hljs"><code><div>1 1 1 1 1
+1 1 1 2
+1 1 3
+1 2 2
+1 4
+2 3
+</div></code></pre>
+<p>Code:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; res;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; a;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s)</span></span>{
+  <span class="hljs-keyword">if</span>(s == n){
+    res.push_back(a);
+    <span class="hljs-keyword">return</span>;
+  }
+  <span class="hljs-keyword">int</span> mina;
+  <span class="hljs-keyword">if</span> (a.size() == <span class="hljs-number">0</span>) mina = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">else</span> mina = a.back();
+  <span class="hljs-comment">// Chỉ cần i &lt;= n - s vì các số hạng phải dương</span>
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = mina; i &lt;= n - s; i++){ 
+    a.push_back(i);
+    backtrack(s + i);
+    a.pop_back();
+  }
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    backtrack(<span class="hljs-number">0</span>);
+    sort(res.begin(), res.end());
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i: res){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> j: i){
+            <span class="hljs-built_in">cout</span> &lt;&lt; j &lt;&lt; <span class="hljs-string">" "</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+}
+</div></code></pre>
+
+</body>
+</html>

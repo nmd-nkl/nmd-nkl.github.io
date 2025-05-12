@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bai5-OnTap-Stack_Queue_Graph-BFS-DFS.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E1%BB%A9ng-d%E1%BB%A5ng-dfs--bfs">Ứng dụng DFS &amp; BFS</h1>
+<hr>
+<h2 id="b%C3%A0i-1-bi%E1%BA%BFn-%C4%91%E1%BB%95i-s%E1%BB%91">Bài 1: Biến đổi số</h2>
+<p><strong>Đề bài:</strong> Cho hai số nguyên dương S và T (S, T &lt;= 10000). Bạn có thể thực hiện hai thao tác với số hiện tại X:</p>
+<ol>
+<li>Nhân đôi: X = X * 2</li>
+<li>Giảm 1: X = X - 1
+Tìm số thao tác ít nhất để biến đổi số S thành số T. Giả sử rằng kết quả luôn tồn tại và các giá trị trung gian không vượt quá một giới hạn nào đó (ví dụ: 20000).</li>
+</ol>
+<p><strong>Input:</strong></p>
+<ul>
+<li>Dòng duy nhất chứa hai số nguyên S và T.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>In ra số thao tác ít nhất.</li>
+</ul>
+<p><strong>Ví dụ:</strong>
+<em>Input:</em></p>
+<pre class="hljs"><code><div>2 7
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>3
+</div></code></pre>
+<p><strong>Giải thích:</strong> Sử dụng BFS. Coi mỗi số là một trạng thái (đỉnh). Từ trạng thái <code>u</code>, có thể chuyển đến trạng thái <code>u*2</code> và <code>u-1</code> (nếu hợp lệ). Tìm đường đi ngắn nhất từ S đến T trên đồ thị trạng thái này. Dùng mảng <code>dist</code> để lưu số bước và <code>visited</code> để tránh lặp lại trạng thái.</p>
+<p><strong>Code (BFS):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX_VAL = <span class="hljs-number">20001</span>; <span class="hljs-comment">// Giới hạn giá trị số có thể đạt tới</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> s, t;
+    <span class="hljs-built_in">cin</span> &gt;&gt; s &gt;&gt; t;
+
+    <span class="hljs-keyword">if</span> (s &gt;= t) { <span class="hljs-comment">// Nếu S &gt;= T, chỉ có thể trừ đi 1</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; s - t &lt;&lt; <span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-built_in">queue</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; q; <span class="hljs-comment">// &lt;số hiện tại, số bước&gt;</span>
+    <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; dist; <span class="hljs-comment">// Lưu số bước tới mỗi số </span>
+
+    q.push({s, <span class="hljs-number">0</span>});
+    dist[s] = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">while</span> (!q.empty()) {
+        <span class="hljs-keyword">int</span> currVal = q.front().first;
+        <span class="hljs-keyword">int</span> curDist = q.front().second;
+        q.pop();
+
+        <span class="hljs-keyword">if</span> (currVal == t) { <span class="hljs-comment">// Đã tìm thấy T</span>
+            <span class="hljs-built_in">cout</span> &lt;&lt; curDist &lt;&lt; <span class="hljs-built_in">endl</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        }
+
+        <span class="hljs-comment">// Thao tác 1: Nhân đôi</span>
+        <span class="hljs-keyword">int</span> nxtVal1 = currVal * <span class="hljs-number">2</span>;
+        <span class="hljs-comment">// Kiểm tra nxtVal1 có hợp lệ và chưa thăm hoặc có đường đi tốt hơn</span>
+        <span class="hljs-keyword">if</span> (nxtVal1 &lt; MAX_VAL &amp;&amp; dist.find(nxtVal1) == dist.end()) {
+             dist[nxtVal1] = curDist + <span class="hljs-number">1</span>;
+             q.push({nxtVal1, curDist + <span class="hljs-number">1</span>});
+        }
+
+
+        <span class="hljs-comment">// Thao tác 2: Giảm 1</span>
+        <span class="hljs-keyword">int</span> nxtVal2 = currVal - <span class="hljs-number">1</span>;
+         <span class="hljs-comment">// Kiểm tra nxtVal2 có hợp lệ (&gt;0) và chưa thăm hoặc có đường đi tốt hơn</span>
+        <span class="hljs-keyword">if</span> (nxtVal2 &gt; <span class="hljs-number">0</span> &amp;&amp; dist.find(nxtVal2) == dist.end()) {
+            dist[nxtVal2] = curDist + <span class="hljs-number">1</span>;
+            q.push({nxtVal2, curDist + <span class="hljs-number">1</span>});
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// Trường hợp không tìm thấy (đề bài đảm bảo có)</span>
+}
+</div></code></pre>
+<hr>
+<h2 id="b%C3%A0i-2-t%C3%ACm-%C4%91%C6%B0%E1%BB%9Dng-%C4%91i-ng%E1%BA%AFn-nh%E1%BA%A5t-trong-m%C3%AA-cung">Bài 2: Tìm đường đi ngắn nhất trong mê cung</h2>
+<p><strong>Đề bài:</strong> Cho một mê cung được biểu diễn bằng lưới ô vuông kích thước N x M. Một số ô là tường ('#'), một số ô là đường đi ('.'). Có một điểm bắt đầu 'S' và điểm kết thúc 'E'. Bạn chỉ có thể di chuyển lên, xuống, trái, phải tới các ô đường đi. Tìm độ dài đường đi ngắn nhất từ 'S' đến 'E'. Nếu không có đường đi, in ra -1.</p>
+<p><strong>Input:</strong></p>
+<ul>
+<li>Dòng đầu tiên chứa hai số nguyên N và M (1 &lt;= N, M &lt;= 1000).</li>
+<li>N dòng tiếp theo, mỗi dòng chứa M ký tự mô tả mê cung.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>In ra độ dài đường đi ngắn nhất. Nếu không tồn tại, in -1.</li>
+</ul>
+<p><strong>Ví dụ:</strong>
+<em>Input:</em></p>
+<pre class="hljs"><code><div>5 5
+S.#..
+.#...
+.#.##
+..#E.
+.....
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>9
+</div></code></pre>
+<p><strong>Giải thích:</strong> Dùng BFS. Coi lưới ô vuông là đồ thị, mỗi ô là một đỉnh, các ô kề nhau (trên, dưới, trái, phải và không phải tường) có cạnh nối. BFS tìm đường đi ngắn nhất trên đồ thị không trọng số. Dùng một mảng <code>dist[N][M]</code> để lưu khoảng cách ngắn nhất từ 'S' đến ô (i, j).</p>
+<p><strong>Code (BFS):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;tuple&gt; // Để dùng tuple hoặc pair</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">1001</span>;
+<span class="hljs-keyword">char</span> grid[MAXN][MAXN];
+<span class="hljs-keyword">int</span> dist[MAXN][MAXN]; <span class="hljs-comment">// Lưu khoảng cách ngắn nhất</span>
+<span class="hljs-keyword">int</span> n, m;
+<span class="hljs-keyword">int</span> start_r, start_c, end_r, end_c;
+
+<span class="hljs-comment">// Các hướng di chuyển: lên, xuống, trái, phải</span>
+<span class="hljs-keyword">int</span> dr[] = {<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+<span class="hljs-keyword">int</span> dc[] = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">1</span>};
+
+<span class="hljs-comment">// Kiểm tra ô (r, c) có hợp lệ không (trong biên, không phải tường)</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c)</span> </span>{
+    <span class="hljs-keyword">return</span> r &gt;= <span class="hljs-number">0</span> &amp;&amp; r &lt; n &amp;&amp; c &gt;= <span class="hljs-number">0</span> &amp;&amp; c &lt; m &amp;&amp; grid[r][c] != <span class="hljs-string">'#'</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+            dist[i][j] = <span class="hljs-number">-1</span>; <span class="hljs-comment">// Khởi tạo khoảng cách là -1 (chưa tới)</span>
+        }
+    }
+
+    <span class="hljs-built_in">queue</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; q;
+
+    q.push({start_r, start_c});
+    dist[start_r][start_c] = <span class="hljs-number">0</span>; <span class="hljs-comment">// Khoảng cách từ S đến chính nó là 0</span>
+
+    <span class="hljs-keyword">while</span> (!q.empty()) {
+        <span class="hljs-keyword">int</span> r = q.front().first;
+        <span class="hljs-keyword">int</span> c = q.front().second;
+        q.pop();
+
+        <span class="hljs-keyword">if</span> (r == end_r &amp;&amp; c == end_c) { <span class="hljs-comment">// Nếu đến được đích</span>
+            <span class="hljs-keyword">return</span> dist[r][c];
+        }
+
+        <span class="hljs-comment">// Thử di chuyển 4 hướng</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i) {
+            <span class="hljs-keyword">int</span> nr = r + dr[i];
+            <span class="hljs-keyword">int</span> nc = c + dc[i];
+
+            <span class="hljs-comment">// Nếu ô mới hợp lệ và chưa được thăm (dist == -1)</span>
+            <span class="hljs-keyword">if</span> (isValid(nr, nc) &amp;&amp; dist[nr][nc] == <span class="hljs-number">-1</span>) {
+                dist[nr][nc] = dist[r][c] + <span class="hljs-number">1</span>; <span class="hljs-comment">// Cập nhật khoảng cách</span>
+                q.push({nr, nc});           <span class="hljs-comment">// Thêm vào hàng đợi</span>
+            }
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; <span class="hljs-comment">// Không tìm thấy đường đi</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+            <span class="hljs-built_in">cin</span> &gt;&gt; grid[i][j];
+            <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">'S'</span>) {
+                start_r = i; start_c = j;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">'E'</span>) {
+                end_r = i; end_c = j;
+            }
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; bfs() &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="b%C3%A0i-3-%22l%C3%A0m-kh%C3%B4%22-v%C3%B9ng-n%C6%B0%E1%BB%9Bc-flood-fill">Bài 3: &quot;Làm khô&quot; vùng nước (Flood Fill)</h2>
+<p><strong>Đề bài:</strong> Cho một bản đồ kích thước N x M, một số ô là đất liền ('L'), một số ô là nước ('W'). Chọn một ô nước (r, c), hãy &quot;làm khô&quot; tất cả các ô nước liên thông với ô (r, c) (bao gồm cả ô (r,c)) bằng cách chuyển chúng thành đất liền ('L'). Hai ô được coi là liên thông nếu chúng kề cạnh (chung cạnh). In ra bản đồ sau khi làm khô.</p>
+<p><strong>Input:</strong></p>
+<ul>
+<li>Dòng đầu tiên chứa hai số nguyên N và M (1 &lt;= N, M &lt;= 100).</li>
+<li>Dòng tiếp theo chứa hai số nguyên r và c (0 &lt;= r &lt; N, 0 &lt;= c &lt; M) là tọa độ ô nước bắt đầu.</li>
+<li>N dòng tiếp theo, mỗi dòng chứa M ký tự mô tả bản đồ. Ô (r, c) được đảm bảo là 'W'.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>In ra N dòng, mỗi dòng M ký tự là bản đồ sau khi đã làm khô vùng nước liên thông.</li>
+</ul>
+<p><strong>Ví dụ:</strong>
+<em>Input:</em></p>
+<pre class="hljs"><code><div>5 5
+1 1
+LLLLL
+LWWWL
+LWWWL
+LWWWL
+LLLLL
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>LLLLL
+LLLLL
+LLLLL
+LLLLL
+LLLLL
+</div></code></pre>
+<p><strong>Giải thích:</strong> Dùng DFS hoặc BFS bắt đầu từ ô (r, c). Mỗi khi thăm một ô nước, chuyển nó thành đất liền và gọi đệ quy/thêm vào hàng đợi các ô nước kề cạnh chưa được thăm.</p>
+<p><strong>Code (DFS):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">101</span>;
+<span class="hljs-keyword">char</span> grid[MAXN][MAXN];
+<span class="hljs-keyword">int</span> n, m;
+
+<span class="hljs-comment">// Các hướng di chuyển: 4 hướng</span>
+<span class="hljs-keyword">int</span> dr[] = {<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+<span class="hljs-keyword">int</span> dc[] = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">1</span>};
+
+<span class="hljs-comment">// Kiểm tra ô (r, c) có hợp lệ không</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c)</span> </span>{
+    <span class="hljs-keyword">return</span> r &gt;= <span class="hljs-number">0</span> &amp;&amp; r &lt; n &amp;&amp; c &gt;= <span class="hljs-number">0</span> &amp;&amp; c &lt; m;
+}
+
+<span class="hljs-comment">// Hàm DFS Flood Fill</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfsFill</span><span class="hljs-params">(<span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> c)</span> </span>{
+    <span class="hljs-keyword">if</span> (!isValid(r, c) || grid[r][c] != <span class="hljs-string">'W'</span>) { <span class="hljs-comment">// Nếu ra ngoài biên hoặc không phải nước</span>
+        <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Dừng lại</span>
+    }
+
+    grid[r][c] = <span class="hljs-string">'L'</span>; <span class="hljs-comment">// "Làm khô" ô hiện tại</span>
+
+    <span class="hljs-comment">// Gọi đệ quy cho 4 ô xung quanh</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i) {
+        dfsFill(r + dr[i], c + dc[i]);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> start_r, start_c;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; start_r &gt;&gt; start_c;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+            <span class="hljs-built_in">cin</span> &gt;&gt; grid[i][j];
+        }
+    }
+
+    dfsFill(start_r, start_c); <span class="hljs-comment">// Bắt đầu Flood Fill từ ô (start_r, start_c)</span>
+
+    <span class="hljs-comment">// In ra bản đồ kết quả</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; grid[i][j];
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+
+</body>
+</html>
