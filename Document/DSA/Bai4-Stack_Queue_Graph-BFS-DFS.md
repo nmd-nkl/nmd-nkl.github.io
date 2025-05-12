@@ -1,4 +1,4 @@
-Stack, Queue & Đồ thị (BFS, DFS)
+# Stack, Queue & Đồ thị (BFS, DFS)
 # Mục lục
 
 - [1. Stack & Queue](#1-stack--queue)
