@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CPP-Part2_Buoi2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="bu%E1%BB%95i-2">Buổi 2:</h1>
+<h3 id="m%E1%BB%A5c-l%E1%BB%A5c">Mục lục</h3>
+<ol>
+<li><a href="#1-pair">Pair</a></li>
+<li><a href="#2-vector--iterator">Vector &amp; Iterator</a></li>
+<li><a href="#3-lower_bound-v%C3%A0-upper_bound">lower_bound và upper_bound</a></li>
+<li><a href="#4-map">Map</a></li>
+<li><a href="#5-set">Set</a></li>
+</ol>
+<p><a href="#b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">Bài tập luyện tập</a></p>
+<hr>
+<h1 id="1-pair">1. Pair</h1>
+<ul>
+<li>
+<p>Pair dùng để ghép 2 kiểu dữ liệu (có thể khác nhau) lại thành một.</p>
+</li>
+<li>
+<p>Thuộc thư viện <strong><code>#include &lt;utility&gt;</code></strong></p>
+</li>
+</ul>
+<h3 id="s%E1%BB%AD-d%E1%BB%A5ng"><strong>Sử dụng</strong></h3>
+<pre class="hljs"><code><div>    <span class="hljs-comment">//Khai báo 1 Pair</span>
+    pair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; my_pair;
+    <span class="hljs-comment">//Khai báo và Gán Giá trị</span>
+    <span class="hljs-function">pair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">double</span>&gt; <span class="hljs-title">mine2</span><span class="hljs-params">(<span class="hljs-string">"ToiLaPair"</span>, <span class="hljs-number">1.23</span>)</span></span>;
+</div></code></pre>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// Gán giá trị</span>
+    my_pair.first = <span class="hljs-string">"toi"</span>;
+    my_pair.second = <span class="hljs-number">28</span>;
+    <span class="hljs-comment">//Or</span>
+    my_pair = {<span class="hljs-string">"toi"</span>, <span class="hljs-number">28</span>};
+    <span class="hljs-comment">//Or</span>
+    my_pair = make_pair(<span class="hljs-string">"toi"</span>, <span class="hljs-number">28</span>);
+</div></code></pre>
+<pre class="hljs"><code><div>    <span class="hljs-comment">//In ra màn hình</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; my_pair.first &lt;&lt; <span class="hljs-string">' '</span> &lt;&lt; my_pair.second;
+</div></code></pre>
+<p><strong><code>Note: Lúc này Pair giống như 1 kiểu dữ liệu, ta có thể sử dụng như 1 biến ta hay dùng.</code></strong></p>
+<ul>
+<li>Ví dụ</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-comment">//Swap</span>
+    pair &lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; a, b;
+    a = {<span class="hljs-string">"a"</span>, <span class="hljs-number">1</span>}; b = {<span class="hljs-string">"b"</span>, <span class="hljs-number">2</span>};
+    swap(a, b);
+    <span class="hljs-built_in">cout</span> &lt;&lt; a.first &lt;&lt; <span class="hljs-string">' '</span> &lt;&lt; a.second; <span class="hljs-comment">// Output: b 2</span>
+</div></code></pre>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// So sánh 2 Pair</span>
+    <span class="hljs-comment">//Riêng từng thành phần</span>
+    <span class="hljs-keyword">if</span>(a.first!=b.first) 
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"string 2 biến khác nhau"</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"string giống nhau"</span>;
+    <span class="hljs-comment">//chung</span>
+    <span class="hljs-keyword">if</span>(a==b) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a giống b"</span>;
+</div></code></pre>
+<h4 id="l%C6%B0u-%C3%BD"><code>LƯU Ý</code>:</h4>
+<p>Khi so sánh 2 <code>pair</code>, chương trình sẽ tự động so sánh giá trị first
+sau đó so sánh giá trị second.</p>
+<h3 id="pair-l%E1%BB%93ng-nhau"><strong>Pair lồng nhau</strong></h3>
+<pre class="hljs"><code><div>    pair&lt;<span class="hljs-keyword">int</span>, pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; &gt; p1;
+    p1.first = <span class="hljs-number">10</span>;
+    p1.second.first = <span class="hljs-string">'A'</span>;
+    p1.second.second = <span class="hljs-number">20</span>;
+</div></code></pre>
+<h1 id="2-vector--iterator">2. Vector &amp; Iterator</h1>
+<p>a. <strong>Vector trong C++</strong></p>
+<ul>
+<li><strong>Định nghĩa</strong>: Vector là một container động, giống mảng nhưng có thể tự động thay đổi kích thước.</li>
+<li><strong>Khai báo</strong>:<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; vec;
+</div></code></pre>
+</li>
+<li><strong>Thao tác cơ bản</strong>:
+<ul>
+<li>Thêm phần tử: <strong><code>vec.push_back(value);</code></strong></li>
+<li>Xóa phần tử: <strong><code>vec.erase(vec.begin() + index);</code></strong></li>
+<li>Kích thước vector: <strong><code>vec.size();</code></strong></li>
+<li>Truy cập phần tử: <strong><code>vec[index];</code></strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>b. <strong>Iterator</strong></p>
+<ul>
+<li>Iterator là một đối tượng trỏ tới các phần tử trong container (Vector, List, Set,...).</li>
+<li><strong>Định nghĩa</strong>: Có 4 iterator chính trong vector :
+<img src="https://i.imgur.com/pISIrsH.png" alt="Iterator"></li>
+<li><strong>Cách khai báo</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">28</span>, <span class="hljs-number">100</span>, <span class="hljs-number">30</span>, <span class="hljs-number">20</span>, <span class="hljs-number">15</span>};
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it1 = v.begin();
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[0] = "</span> &lt;&lt; *it1 &lt;&lt; <span class="hljs-string">'\n'</span>;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::reverse_iterator it2 = v.rbegin();
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[4] = "</span> &lt;&lt; *it2 &lt;&lt; <span class="hljs-string">'\n'</span>;
+    <span class="hljs-comment">//OR</span>
+    <span class="hljs-keyword">auto</span> it = v.begin();
+</div></code></pre>
+<ul>
+<li><strong>Các thao tác cơ bản</strong>:
+<ul>
+<li>Iterator hỗ trợ các toán tử ++, -- hoặc toán tử toán học để bạn có thể di chuyển iterator qua lại các phần tử trong vector.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = v.begin();
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[0] = "</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">'\n'</span>;<span class="hljs-comment">//1</span>
+++it;
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[1] = "</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">'\n'</span>;<span class="hljs-comment">//2</span>
+it += <span class="hljs-number">2</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[3] = "</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">'\n'</span>;<span class="hljs-comment">//4</span>
+--it;
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"v[2] = "</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">'\n'</span>;<span class="hljs-comment">//3</span>
+</div></code></pre>
+</li>
+</ul>
+<h3 id="note-h%C3%A0m-sort-cho-vector"><code>Note</code>: Hàm sort cho Vector</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">//Mảng</span>
+sort(arr, arr + n);
+<span class="hljs-comment">//Vector</span>
+sort(vec.begin(), vec.end());
+<span class="hljs-comment">//Mặc định là sắp xếp tăng dần.</span>
+<span class="hljs-comment">//Nếu muốn Sort giảm dần</span>
+sort(vec.begin(), vec.end(), greater&lt;<span class="hljs-keyword">int</span>&gt;());
+<span class="hljs-comment">//OR</span>
+sort(vec.rbegin(), vec.rend());
+</div></code></pre>
+<h1 id="3-lowerbound-v%C3%A0-upperbound">3. <strong>lower_bound và upper_bound</strong></h1>
+<ul>
+<li>
+<p><strong>Yêu cầu</strong>: Mảng/Vector phải được sắp xếp tăng dần trước.</p>
+</li>
+<li>
+<p><strong>lower_bound</strong>: Tìm vị trí đầu tiên trong mảng (đã sắp xếp) mà giá trị &gt;= x.</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>     <span class="hljs-keyword">auto</span> it = lower_bound(vec.begin(), vec.end(), x);
+</div></code></pre>
+<ul>
+<li><strong>upper_bound</strong>: Tìm vị trí đầu tiên mà giá trị &gt; x.</li>
+</ul>
+<pre class="hljs"><code><div>     <span class="hljs-keyword">auto</span> it = upper_bound(vec.begin(), vec.end(), x);
+</div></code></pre>
+<ul>
+<li><strong>Ví dụ minh họa</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>     <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; vec = {<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>};
+     <span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+     <span class="hljs-keyword">auto</span> it1 = lower_bound(vec.begin(), vec.end(), x); <span class="hljs-comment">// it1 trỏ tới 5</span>
+     <span class="hljs-keyword">auto</span> it2 = upper_bound(vec.begin(), vec.end(), x); <span class="hljs-comment">// it2 trỏ tới 7</span>
+</div></code></pre>
+<h1 id="4-map">4. <strong>map</strong></h1>
+<ul>
+<li>Lưu trữ cặp <strong>khóa-giá trị</strong>.</li>
+<li><strong>Khóa</strong> duy nhất và tự động <strong>sắp xếp</strong> (mặc định theo thứ tự tăng).</li>
+</ul>
+<h3 id="c%C3%A1ch-s%E1%BB%AD-d%E1%BB%A5ng">Cách sử dụng:</h3>
+<ul>
+<li><strong>Khởi tạo</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">string</span>&gt; mp;
+</div></code></pre>
+<ul>
+<li><strong>Thêm phần tử</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>mp[<span class="hljs-number">1</span>] = <span class="hljs-string">"One"</span>;
+mp.insert({<span class="hljs-number">2</span>, <span class="hljs-string">"Two"</span>});
+</div></code></pre>
+<ul>
+<li><strong>Truy cập</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">cout</span> &lt;&lt; mp[<span class="hljs-number">1</span>]; <span class="hljs-comment">//One</span>
+</div></code></pre>
+<ul>
+<li><strong>Duyệt</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; p : m) 
+    <span class="hljs-built_in">cout</span> &lt;&lt; p.first &lt;&lt; <span class="hljs-string">" : "</span> &lt;&lt; p.second &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h3 id="so-s%C3%A1nh-map-v%C3%A0-unorderedmap">So sánh <code>Map</code> và <code>Unordered_map</code></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>map</code></th>
+<th><code>unordered_map</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tốc độ truy vấn</strong></td>
+<td>O(logN)</td>
+<td>O(1) trung bình, O(N) tệ nhất</td>
+</tr>
+<tr>
+<td><strong>Thứ tự phần tử</strong></td>
+<td>Có thứ tự (theo key)</td>
+<td>Không có thứ tự</td>
+</tr>
+<tr>
+<td><strong>Dùng khi nào?</strong></td>
+<td>Khi cần sắp xếp key</td>
+<td>Khi chỉ cần truy vấn nhanh</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-set">5. <strong>set</strong></h1>
+<ul>
+<li>Lưu trữ <strong>các phần tử duy nhất</strong>.</li>
+<li>Các phần tử trong <strong>set</strong> tự động được <strong>sắp xếp</strong> theo thứ tự tăng (mặc định).</li>
+<li>Các hàm như insert(), erase(), find() có độ phức tạp <strong>O(logN)</strong></li>
+</ul>
+<h3 id="c%C3%A1ch-s%E1%BB%AD-d%E1%BB%A5ng">Cách sử dụng:</h3>
+<ul>
+<li><strong>Khởi tạo</strong>:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;
+</div></code></pre>
+<ul>
+<li><strong>Thêm phần tử</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>s.insert(<span class="hljs-number">10</span>);
+s.insert(<span class="hljs-number">20</span>);
+s.insert(<span class="hljs-number">30</span>);
+</div></code></pre>
+<ul>
+<li><strong>Truy cập</strong>:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">auto</span> it = s.find(<span class="hljs-number">20</span>);
+<span class="hljs-keyword">if</span> (it != s.end()) 
+    <span class="hljs-built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 20</span>
+</div></code></pre>
+<ul>
+<li><strong>Duyệt</strong>:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; elem : s) 
+    <span class="hljs-built_in">cout</span> &lt;&lt; elem &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<ul>
+<li><strong>Xóa phần tử</strong>:</li>
+</ul>
+<pre class="hljs"><code><div>s.erase(<span class="hljs-number">20</span>);
+</div></code></pre>
+<ul>
+<li><strong>Kiểm tra phần tử</strong>:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (s.count(<span class="hljs-number">10</span>) &gt; <span class="hljs-number">0</span>) 
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"10 tồn tại!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<hr>
+<h1 id="b%C3%A0i-t%E1%BA%ADp-luy%E1%BB%87n-t%E1%BA%ADp">Bài tập luyện tập</h1>
+<h2 id="b%C3%A0i-1-pair-vector-map">Bài 1: Pair, Vector, Map</h2>
+<p>Cho một số nguyên dương <strong>n</strong> và một danh sách gồm <strong>n</strong> xâu.</p>
+<p><strong>Output:</strong></p>
+<ul>
+<li>In ra mỗi xâu trong danh sách cùng với tần suất xuất hiện của nó. Nếu hai xâu có cùng tần suất, in ra xâu nào đến trước trong bảng chữ cái trước.</li>
+</ul>
+<p><em>Input:</em></p>
+<pre class="hljs"><code><div>5
+apple
+banana
+apple
+cherry
+banana
+</div></code></pre>
+<p><em>Output:</em></p>
+<pre class="hljs"><code><div>apple 2
+banana 2
+cherry 1
+</div></code></pre>
+<h3 id="g%E1%BB%A3i-%C3%BD-gi%E1%BA%A3i"><code>Gợi ý giải</code>:</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(pair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; a, pair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; b)</span> </span>{
+    <span class="hljs-keyword">if</span> (a.second == b.second)
+        <span class="hljs-keyword">return</span> a.first &lt; b.first;  <span class="hljs-comment">// Nếu tần suất giống nhau, sắp xếp theo bảng chữ cái</span>
+    <span class="hljs-keyword">return</span> a.second &gt; b.second;  <span class="hljs-comment">// Nếu không, sắp xếp theo tần suất giảm dần</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> n; <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    
+    <span class="hljs-built_in">map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; freqMap;  <span class="hljs-comment">// map lưu tần suất của các xâu</span>
+    
+    <span class="hljs-comment">// Nhập các xâu và cập nhật tần suất</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-built_in">string</span> s; <span class="hljs-built_in">cin</span> &gt;&gt; s;
+        freqMap[s]++;
+    }
+    
+    <span class="hljs-comment">// Chuyển map thành vector các cặp (xâu, tần suất)</span>
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">freqVec</span><span class="hljs-params">(freqMap.begin(), freqMap.end())</span></span>;
+    
+    <span class="hljs-comment">// Sắp xếp vector theo tần suất giảm dần, nếu tần suất giống nhau thì theo thứ tự bảng chữ cái</span>
+    sort(freqVec.begin(), freqVec.end(), cmp);
+    
+    <span class="hljs-comment">// In ra kết quả</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it : freqVec) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; it.first &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; it.second &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h2 id="b%C3%A0i-2-set">Bài 2: Set</h2>
+<p>Nhập n, m. Nhập n phần tử riêng biệt của tập A. Nhập m phần tử riêng biệt của tập B. Tìm Giao của 2 tập hợp.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> n, m;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;
+    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; a, b;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-keyword">int</span> x; <span class="hljs-built_in">cin</span> &gt;&gt; x;
+        a.insert(x);
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) {
+        <span class="hljs-keyword">int</span> x; <span class="hljs-built_in">cin</span> &gt;&gt; x;
+        b.insert(x);
+    }
+    
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; result;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x : a) {
+        <span class="hljs-keyword">if</span> (b.count(x)) result.push_back(x);
+    }
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x : result) <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">" "</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h2 id="b%C3%A0i-3-lowerbound-v%C3%A0-upperbound">Bài 3: lower_bound và upper_bound</h2>
+<p>Cho một mảng số nguyên đã sắp xếp tăng dần gồm <strong>N</strong> phần tử và một số nguyên X.
+Đếm số cặp <strong>(i, j)</strong> sao cho <strong>arr[i] + arr[j] &lt; X</strong> với <strong>i &lt; j</strong>.</p>
+<pre class="hljs"><code><div>Input:
+arr = [1, 2, 3, 5, 7]
+X = 6
+
+Output:
+4
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> n, X;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sol</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; arr)</span> </span>{
+    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;  
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) {
+        <span class="hljs-keyword">auto</span> it = upper_bound(arr.begin() + i + <span class="hljs-number">1</span>, arr.end(), X - arr[i] - <span class="hljs-number">1</span>);
+        count += (it - (arr.begin() + i + <span class="hljs-number">1</span>));
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">//Input</span>
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">arr</span><span class="hljs-params">(n)</span></span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++) <span class="hljs-built_in">cin</span> &gt;&gt; arr[i];
+    <span class="hljs-built_in">cin</span> &gt;&gt; X;
+    <span class="hljs-built_in">cout</span> &lt;&lt; sol(arr);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+
+</body>
+</html>
