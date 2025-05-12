@@ -17,9 +17,9 @@
 
 + ### [Chương 1:  C++](https://nmd-nkl.github.io/Document/CPP/CPP.html)
 
-+ ### [Chương 2: C++ Part2] (https://github.com/nmd-nkl/nmd-nkl.github.io/blob/main/Document/CPP-Part2/CPP-Part2.html)
++ ### [Chương 2: C++ Part2](https://github.com/nmd-nkl/nmd-nkl.github.io/blob/main/Document/CPP-Part2/CPP-Part2.html)
 
-+ ### [Chương 3: DSA] (https://github.com/nmd-nkl/nmd-nkl.github.io/blob/main/Document/DSA/DSA.html)
++ ### [Chương 3: DSA](https://github.com/nmd-nkl/nmd-nkl.github.io/blob/main/Document/DSA/DSA.html)
 
 + ### [Chương 4: OOP-UNITY](https://nmd-nkl.github.io/Document/OU/OU.html)
 
